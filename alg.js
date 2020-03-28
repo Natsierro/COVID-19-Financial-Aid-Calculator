@@ -9,8 +9,11 @@ function RHT(m, t){
         will calculate the Réducation Horaire Travail which means the partial unemployment in CHF given to the firm
         m is the monthly salarial mass of the firm and t is the pourcentage of missing hours
     */
+    if(t=>0.1){
+        return m*t*0.8
+    }
+    else{return 0}
     
-    return m*t*0.8
 }
 
 function APG(m, t){
@@ -42,13 +45,14 @@ function Credits(CA){
 
 function covidaid(firm, CA, independant, zipcode, t, m, employees){
     /*
-        will caluclate and return all the information needed to the frontend
+        will calculate and return all the information needed to the frontend about the possible aid for the employees
         VARIABLES:
             firm: "Entreprise individuelle", "Société en nom collectif", "SARL", "SA", "Société en commandite"
             CA: Average monthly revenue (INT in CHF)
             indepandant: Boolean telling if the applicant has the independant status or not
             zipcode: Zipcode of the city where the firm is
             t: The percentage of the economic activity being stopped because of the COVID 19
+            m: mass of all salaries (monthly)
             employees: number of employees
     */
     var rht = 0;
@@ -71,17 +75,16 @@ function covidaid(firm, CA, independant, zipcode, t, m, employees){
         Comment:    The partner of the chief can have a maximum of 3320 CHF for a 100% as RHT
                     The temporar workers & apprentices can also have the classic RHT 
     */
-    if(independant){
+    if(firm=="Entreprise individuelle"){
         /*
             Comment:    The number of subsidies is limited to 10 per month for the people in quarantine
                         If take on managerial tasks the number of subsidies is limited to 30
         */
         if(employees==0){
-            apg = APG(CA,t);
             credit = Credits(CA);
         }
         else{
-            rht = RHT(m,t);
+            rht = RHT(m,t); //for the employees
             apg = APG(CA,t);
             credit = Credits(CA);
         } 
@@ -89,13 +92,52 @@ function covidaid(firm, CA, independant, zipcode, t, m, employees){
 
     else{
         if(employees==0){
-            
-        }
-        else{
-            rht = RHT(m,t)
-            apg = APG(CA,t);
             credit = Credits(CA);
         }
+        else{
+            rht = RHT(m,t);
+            credit = Credits(CA);
+        }
+        
+    }
+}
+
+function covidaid_self(firm, CA, independant, zipcode, t, m){
+    /*
+        will calculate and return all the information needed to the frontend about the possible aid to the employer
+        VARIABLES:
+            firm: "Entreprise individuelle", "Société en nom collectif", "SARL", "SA", "Société en commandite"
+            CA: Average monthly revenue (INT in CHF)
+            indepandant: Boolean telling if the applicant has the independant status or not
+            zipcode: Zipcode of the city where the firm is
+            t: The percentage of the economic activity being stopped because of the COVID 19
+            m: mass of all salaries (monthly)
+            employees: number of employees
+    */
+    var rht = 0;
+    var apg = 0;
+    
+    /*
+        Comment:    The partner of the chief can have a maximum of 3320 CHF for a 100% as RHT
+                    The temporar workers & apprentices can also have the classic RHT 
+    */
+    if(firm=="Entreprise individuelle"){
+        /*
+            Comment:    The number of subsidies is limited to 10 per month for the people in quarantine
+                        If take on managerial tasks the number of subsidies is limited to 30
+        */
+
+        apg = APG(CA,t); //Warning, not applicable for every sector
+    }
+
+    else{
+        if(independant){
+            rht = min(3320,RHT(m,t));
+        }
+        else{
+            rht = RHT(m,t);
+        }
+        
     }
 
 }
