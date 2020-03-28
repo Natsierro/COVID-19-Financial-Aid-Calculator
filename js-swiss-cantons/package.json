@@ -1,0 +1,51 @@
+{
+  "name": "@stefanzweifel/js-swiss-cantons",
+  "version": "1.2.0",
+  "description": "Search for Swiss Canton by abbreviation or name",
+  "main": "src/CantonManager.js",
+  "scripts": {
+    "format": "prettier --write 'src/_assets/**/*.js' 'test/**/*.js'",
+    "lint": "eslint 'src/**/*.js'",
+    "test": "ava",
+    "test-coverage": "nyc ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanzweifel/js-swiss-cantons.git"
+  },
+  "author": "Stefan Zweifel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanzweifel/js-swiss-cantons/issues"
+  },
+  "homepage": "https://github.com/stefanzweifel/js-swiss-cantons#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "ava": "^3.1.0",
+    "eslint": "^6.0.1",
+    "nyc": "^15.0.0",
+    "prettier": "1.19.1",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^3.0.3"
+  },
+  "dependencies": {},
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/data/**.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "report-dir": "./coverage"
+  }
+}
