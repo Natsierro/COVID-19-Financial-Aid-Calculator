@@ -1,0 +1,33 @@
+@charset "utf-8";
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+
+$family-sans-serif: 'Cabin', sans-serif;
+$footer-background-color: rgba(221,208,198,.5);
+$background: #e9e1da;
+$footer-padding: 3rem 1.5rem 3rem;
+
+$title-size: $size-1;
+$subtitle-size: $size-5;
+
+@import "../node_modules/bulma/bulma.sass";
+//todo disable bulma form
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,400i&display=swap');
+@import "vueformulate_bulma.scss";
+
+.footer-credits {
+	font-size: 14px;
+}
+
+.sitename {
+	color: red;
+}
+
+.main {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+.section {
+	flex: 1;
+}

@@ -1,0 +1,12 @@
+{
+  "en": {
+    "hello": "hello world!",
+    "selected": "seleeeect",
+    "corp_form": "Corporate form"
+  },
+  "fr": {
+    "hello": "bonjour!",
+    "selected": "Français sélectionné",
+    "corp_form": "Raison sociale"
+  }
+}
