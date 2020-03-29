@@ -61,11 +61,11 @@ function location(zipcode, language){
         canton_name = canton.setLanguage(language).getName();
     }
 
-    var canton_info = jsObjects.find(canton_ressources => {
+    var canton_info = canton_ressources.find(canton_ressources => {
         return canton_ressources.canton === canton_name
       })
 
-    var city_info = jsObjects.find(city_ressources => {
+    var city_info = city_ressources.find(city_ressources => {
         return city_ressources.city === city_name
         })
 
