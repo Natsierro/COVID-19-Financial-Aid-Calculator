@@ -102,11 +102,10 @@ function covidaid(CA, independant, t, m, employees){
     return credit, rht
 }
 
-function covidaid_self(CA, independant, t, m){
+function covidaid_self(independant, t, m){
     /*
         will calculate and return all the information needed to the frontend about the possible aid to the employer
         VARIABLES:
-            CA: Average monthly revenue (INT in CHF)
             indepandant: Boolean telling if the applicant has the independant status or not
             t: The percentage of the economic activity being stopped because of the COVID 19
             m: mass of all salaries (monthly)
@@ -123,7 +122,7 @@ function covidaid_self(CA, independant, t, m){
     */
 
     if(independant){    
-        apg = APG(CA,t); //Warning, not applicable for every sector
+        apg = APG(m,t); //Warning, not applicable for every sector
     }
     else{
         rht = min(t*3320,RHT(m,t));
