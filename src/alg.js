@@ -1,6 +1,7 @@
 //Covid 19 - Financial Aid Calculator algorithm
 import ZipcodeSearch from '@stefanzweifel/js-swiss-cantons';
 import CantonManager from '@stefanzweifel/js-swiss-cantons';
+import { FALSE } from 'node-sass';
 
 
 var canton_ressources = require('../data/covid19_canton_infos.json');
@@ -71,7 +72,7 @@ function location(zipcode){
     return [city_name, canton_name, canton_info.link_infos, city_info.link_infos];
 }
 
-function covidaid(CA, t, m, employees){
+function covidaid(input){
     /*
         will calculate and return all the information needed to the frontend about the possible aid for the employees
         VARIABLES:
@@ -82,54 +83,29 @@ function covidaid(CA, t, m, employees){
     */
     var result = {
             rht: 0,
-            credit: 0
-        };
+            credit: 0,
+            apg: 0,
+            rht_approx: true
+    };
 
     /*
         Comment:    The partner of the chief can have a maximum of 3320 CHF for a 100% as RHT
                     The temporar workers & apprentices can also have the classic RHT 
     */
 
-   result[credit] = Credits(CA);
+   result[credit] = Credits(input[avg_revenue]);
 
-    if(employees==0){
-
+    if(input[employee_count]==0){
+        result[rht] = min(t*3.32,RHT(input[avg_payroll],input[unemployement_rate]));
+        result[rht_approx] = false;
     }
     else{
-        result[rht] = RHT(m,t); //for the employees
-    } 
-
-    
-    return result;
-}
-
-function covidaid_self(independant, t, m){
-    /*
-        will calculate and return all the information needed to the frontend about the possible aid to the employer
-        VARIABLES:
-            indepandant: Boolean telling if the applicant has the independant status or not
-            t: The percentage of the economic activity being stopped because of the COVID 19
-            m: mass of all salaries (monthly)
-    */
-   var result = {
-        rht: 0,
-        apg: 0
-    };
-    
-    /*
-        Comment:    aux personnes qui, au sein de l'entreprise, occupent une position assimilable à celle de l'employeur (par exemple des associés d'une Sàrl qui travaillent contre rémunération, des personnes travaillant dans l'entreprise de leur conjoint ou de leur partenaire enregistré). Dans ce dernier cas, une somme forfaitaire de 3'320 francs est octroyée pour un emploi à plein temps
-    */
-    /*
-        Comment:    The number of subsidies is limited to 10 per month for the people in quarantine
-                    If take on managerial tasks the number of subsidies is limited to 30
-    */
-
-    if(independant){    
-        result[apg] = APG(m,t); //Warning, not applicable for every sector
+        result[rht] = RHT(input[avg_payroll],input[unemployement_rate]);
     }
-    else{
-        result[rht] = min(t*3.32,RHT(m,t));
+    if(input[independent_worker]){    
+        result[apg] = APG(input[avg_payroll_independent],input[unemployement_rate_independent]);
     }
+
     
     return result;
 }
