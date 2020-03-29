@@ -1,5 +1,5 @@
 //Covid 19 - Financial Aid Calculator algorithm
-import ZipcodeSearch from '@stefanzweifel/js-swiss-cantons';
+import ZipcodeSearch from '@stefanzweifel/js-swiss-cantons/src/ZipcodeSearch';
 import CantonManager from '@stefanzweifel/js-swiss-cantons';
 
 
@@ -48,9 +48,11 @@ function Credits(CA){
 function location(zipcode, language){
     var city_name = "";
     var canton_name = "";
-   
+    
     var search = new ZipcodeSearch();
     var location = search.findbyZipcode(zipcode);
+    console.log(location);
+    return;
     if(location){
         var manager = new CantonManager();
         var canton = manager.getByAbbreviation(location.canton);
@@ -67,7 +69,7 @@ function location(zipcode, language){
         return city_ressources.city === city_name
         })
 
-    return [city_name, canton_name, canton_info.link_infos, city_info.link_infos];
+    return [city_name, canton_abbrev, canton_name, canton_info.link_infos, city_info.link_infos];
 }
 
 function covidaid(input){
