@@ -1,10 +1,10 @@
 //Covid 19 - Financial Aid Calculator algorithm
-import ZipcodeSearch from 'js-swiss-cantons/src';
-import CantonManager from 'js-swiss-cantons/src';
+import ZipcodeSearch from '@stefanzweifel/js-swiss-cantons';
+import CantonManager from '@stefanzweifel/js-swiss-cantons';
 
 
-var canton_ressources = require('.data/covid19_canton_infos.json');
-var city_ressources = require('.data/covid19_city_infos.json');
+var canton_ressources = require('../data/covid19_canton_infos.json');
+var city_ressources = require('../data/covid19_city_infos.json');
 var language = 'fr';
 
 function RHT(m, t){
@@ -68,7 +68,7 @@ function location(zipcode){
         return city_ressources.city === city_name
         })
 
-    return city_name, canton_name, canton_info.link_infos, city_info.link_infos
+    return [city_name, canton_name, canton_info.link_infos, city_info.link_infos];
 }
 
 function covidaid(CA, independant, t, m, employees){
@@ -98,8 +98,7 @@ function covidaid(CA, independant, t, m, employees){
         rht = RHT(m,t); //for the employees
     } 
 
-        
-    return credit, rht
+    return [credit, rht];
 }
 
 function covidaid_self(independant, t, m){
@@ -128,6 +127,7 @@ function covidaid_self(independant, t, m){
         rht = min(t*3320,RHT(m,t));
     }
     
-    return rht, apg
+    return [rht, apg];
 }
 
+export { language, covidaid };

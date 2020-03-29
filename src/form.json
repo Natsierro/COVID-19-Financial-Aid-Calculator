@@ -1,0 +1,16 @@
+{
+  "fr": [
+    {
+      "type": "text",
+      "name": "name",
+      "label": "What is your name?",
+      "placeholder": "Your name...",
+      "validation": "required"
+    },
+    {
+      "name": "submit",
+      "type": "submit",
+      "label": "$t('corp_form')"
+    }
+  ]
+}

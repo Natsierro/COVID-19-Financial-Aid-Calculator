@@ -3,7 +3,7 @@
     <div class="container">
       <FormulateForm
         v-model="company_details"
-        @submit="sendData"
+        @submit="compute_aids"
       >
         <div class="nextby">
           <FormulateInput
@@ -15,11 +15,11 @@
             validation="required"
           />
           <FormulateInput
+            v-model="independent_worker"
             class="independent_worker"
             type="checkbox"
             name="independent_worker"
             label="Indépendant"
-            v-model="independent_worker"
             :disabled="this.company_details['corp_form'] == 'indiv'"
           />
         </div>
@@ -43,48 +43,57 @@
           error-behavior="live"
         />
         <div class="nextby">
-        <FormulateInput
-          type="text"
-          name="avg_payroll_monthly"
-          :label="(!independent_worker) ? $t('avg_payroll_monthly_employees') : $t('avg_payroll_monthly_independentsemployees')"
-          validation="required|number"
-          value="0"
-          min="0"
-          error-behavior="live"
-        />
-        <FormulateInput
-          type="text"
-          name="avg_payroll_monthly_independent"
-          label="Salaire mensuel moyen de l'indépendant (milliers de francs)"
-          validation="required|number"
-          value="0"
-          min="0"
-          error-behavior="live"
-          v-if="independent_worker"
-        />
+          <FormulateInput
+            type="text"
+            name="avg_payroll_monthly"
+            :label="(!independent_worker) ? $t('avg_payroll_monthly_employees') : $t('avg_payroll_monthly_independentsemployees')"
+            validation="required|number"
+            value="0"
+            min="0"
+            error-behavior="live"
+          />
+          <FormulateInput
+            v-if="independent_worker"
+            type="text"
+            name="avg_payroll_monthly_independent"
+            label="Salaire mensuel moyen de l'indépendant (milliers de francs)"
+            validation="required|number"
+            value="0"
+            min="0"
+            error-behavior="live"
+          />
         </div>
         <div class="nextby">
-        <FormulateInput
-          type="text"
-          name="unemployement_rate"
-          label="Taux de chômage partiel"
-          validation="required|number"
-          value="0"
-          min="0"
-          max="100"
-          error-behavior="live"
-        />
-        <FormulateInput
-          type="text"
-          name="unemployement_rate_independent"
-          label="Taux de chômage partiel de l'indépendant"
-          validation="required|number"
-          value="0"
-          min="0"
-          max="100"
-          error-behavior="live"
-          v-if="independent_worker"
-        />
+          <FormulateInput
+            type="text"
+            name="unemployement_rate"
+            label="Taux de chômage partiel"
+            validation="required|number"
+            value="0"
+            min="0"
+            max="100"
+            error-behavior="live"
+          />
+          <FormulateInput
+            type="text"
+            name="employee_count"
+            label="Nombre d'employés"
+            validation="required|number"
+            value="0"
+            min="0"
+            error-behavior="live"
+          />
+          <FormulateInput
+            v-if="independent_worker"
+            type="text"
+            name="unemployement_rate_independent"
+            label="Taux de chômage partiel de l'indépendant"
+            validation="required|number"
+            value="0"
+            min="0"
+            max="100"
+            error-behavior="live"
+          />
         </div>
         <FormulateInput
           type="submit"
@@ -104,11 +113,6 @@ export default {
   name: 'HelloWorld',
   data () {
     return { company_details: {} };
-  },
-  watch: {
-    values() {
-      //this.company_details['independent_worker'] = this.company_details['corp_form'] == "indiv";
-    }
   },
   computed: {
     independent_worker: {
@@ -136,10 +140,25 @@ export default {
       return values;
     }
   },
+  watch: {
+    values() {
+      //this.company_details['independent_worker'] = this.company_details['corp_form'] == "indiv";
+    }
+  },
+  props: {
+    algo: Object()
+  },
   methods: {
-    sendData (data) {
+    compute_aids (data) {
       this.submittedValues = data;
-      alert('OK');
+      const revenue = data.avg_rev_monthly;
+      const isIndependent = data.independent_worker;
+      const unemployement_rate = data.unemployement_rate;
+      const payroll = data.avg_payroll_monthly;
+      const employees = data.employee_count;
+      console.log("OK " + revenue + ", " + isIndependent + ", " + unemployement_rate + ", " + payroll + ", " + employees);
+      var credit, rht = this.$props.algo.covidaid(revenue, isIndependent, unemployement_rate, payroll, employees);
+      console.log(credit, rht);
     }
   }
 }

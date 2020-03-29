@@ -5,7 +5,7 @@
   >
     <TopBar />
     <HeaderView msg="Welcome to Your Vue.js App" />
-    <MainForm msg="Welcome to Your Vue.js App" />
+    <MainForm :algo="algo" />
     <FooterView msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -15,6 +15,9 @@ import TopBar from './components/TopBar.vue'
 import HeaderView from './components/HeaderView.vue'
 import MainForm from './components/MainForm.vue'
 import FooterView from './components/FooterView.vue'
+
+const algo = require('./alg.js');
+console.log(algo);
 
 export default {
   name: 'App',
@@ -26,7 +29,7 @@ export default {
   },
   data () {
     return {
-      msg: "hi!"
+      algo: algo
     }
   }
 }
