@@ -7,7 +7,7 @@
   .formulate-input-label {
     display: block;
     line-height: 1.5;
-    font-size: .9em;
+    font-size: 1em;
     font-weight: 600;
     margin-bottom: .1em;
   }
@@ -19,7 +19,7 @@
 
   .formulate-input-help {
     color: $formulate-gray-ddd;
-    font-size: .7em;
+    font-size: .9em;
     font-weight: 400;
     line-height: 1.5;
     margin-bottom: .25em;
@@ -34,7 +34,7 @@
   .formulate-input-error,
   .formulate-file-upload-error {
     color: $formulate-error;
-    font-size: .8em;
+    font-size: .9em;
     font-weight: 300;
     line-height: 1.5;
     margin-bottom: .25em;
@@ -202,9 +202,10 @@
 &[data-classification='button'] {
   button {
     @include baseinput;
-    border-color: $formulate-green;
-    background-color: $formulate-green;
-    color: white;
+    border-color: black;
+    border-width: 2px;
+    background-color: rgba(221, 208, 198, 0.5);
+    color: black;
     min-width: 0;
     width: auto;
     font-weight: bold;
