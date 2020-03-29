@@ -9,7 +9,15 @@ $footer-padding: 3rem 1.5rem 3rem;
 $title-size: $size-1;
 $subtitle-size: $size-5;
 
-@import "../node_modules/bulma/bulma.sass";
+/*! bulma.io v0.8.1 | MIT License | github.com/jgthms/bulma */
+@import "../node_modules/bulma/sass/utilities/_all";
+@import "../node_modules/bulma/sass/base/_all";
+@import "../node_modules/bulma/sass/elements/_all";
+/*@import "../node_modules/bulma/sass/form/_all";*/
+@import "../node_modules/bulma/sass/components/_all";
+@import "../node_modules/bulma/sass/grid/_all";
+@import "../node_modules/bulma/sass/layout/_all";
+
 //todo disable bulma form
 @import url('https://fonts.googleapis.com/css?family=Cabin:400,400i&display=swap');
 @import "vueformulate_bulma.scss";

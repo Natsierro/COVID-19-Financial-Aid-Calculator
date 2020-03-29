@@ -1,9 +1,12 @@
 <template>
-  <div id="app" class="main">
-    <TopBar/>
-    <HeaderView msg="Welcome to Your Vue.js App"/>
-    <MainForm msg="Welcome to Your Vue.js App"/>
-    <FooterView msg="Welcome to Your Vue.js App"/>
+  <div
+    id="app"
+    class="main"
+  >
+    <TopBar />
+    <HeaderView msg="Welcome to Your Vue.js App" />
+    <MainForm msg="Welcome to Your Vue.js App" />
+    <FooterView msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 

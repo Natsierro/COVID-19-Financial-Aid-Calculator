@@ -1,8 +1,17 @@
 <template>
   <nav>
     <ul>
-      <li v-for="code in languages" :key="code" v-bind:class="[unavailables.includes(code) ? 'unavailable' : '', $i18n.locale == code ? 'active' : '']">
-        <a :lang="code" :title="$t('selected', code)" :aria-label="$t('selected', code)" @click="showMore(code)">{{ code.toUpperCase() }}</a>
+      <li
+        v-for="code in languages"
+        :key="code"
+        :class="[unavailables.includes(code) ? 'unavailable' : '', $i18n.locale == code ? 'active' : '']"
+      >
+        <a
+          :lang="code"
+          :title="$t('selected', code)"
+          :aria-label="$t('selected', code)"
+          @click="showMore(code)"
+        >{{ code.toUpperCase() }}</a>
       </li>
     </ul>
   </nav>

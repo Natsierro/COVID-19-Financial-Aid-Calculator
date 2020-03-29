@@ -333,6 +333,16 @@
           border-color: $formulate-green;
         }
       }
+	  
+	  input:disabled {
+        & ~ .formulate-input-element-decorator {
+          border-color: $formulate-gray-d !important;
+		  
+		  &::before {
+            background-color: $formulate-gray-d !important;
+          }
+        }
+      }
     }
 
     .formulate-input-label--after {
