@@ -1,12 +1,10 @@
 //Covid 19 - Financial Aid Calculator algorithm
 import ZipcodeSearch from '@stefanzweifel/js-swiss-cantons';
 import CantonManager from '@stefanzweifel/js-swiss-cantons';
-import { FALSE } from 'node-sass';
 
 
 var canton_ressources = require('../data/covid19_canton_infos.json');
 var city_ressources = require('../data/covid19_city_infos.json');
-var language = 'fr';
 
 function RHT(m, t){
     /*
@@ -47,7 +45,7 @@ function Credits(CA){
     }
 }
 
-function location(zipcode){
+function location(zipcode, language){
     var city_name = "";
     var canton_name = "";
    
@@ -75,11 +73,6 @@ function location(zipcode){
 function covidaid(input){
     /*
         will calculate and return all the information needed to the frontend about the possible aid for the employees
-        VARIABLES:
-            CA: Average monthly revenue (INT in CHF)
-            t: The percentage of the economic activity being stopped because of the COVID 19
-            m: mass of all salaries (monthly)
-            employees: number of employees
     */
     var result = {
             rht: 0,
@@ -110,4 +103,4 @@ function covidaid(input){
     return result;
 }
 
-export { language, covidaid };
+export { covidaid, location };
