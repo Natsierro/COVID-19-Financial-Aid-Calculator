@@ -45,67 +45,11 @@
               type="text"
               name="avg_rev_monthly"
               label="Revenu mensuel moyen de votre entreprise (milliers de francs)"
-              validation="required|number"
+              validation="number"
               value="0"
               min="0"
               error-behavior="live"
             />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third">
-            <FormulateInput
-              type="text"
-              name="avg_payroll_monthly"
-              :label="(!independent_worker) ? $t('avg_payroll_monthly_employees') : $t('avg_payroll_monthly_independentsemployees')"
-              validation="required|number"
-              value="0"
-              min="0"
-              error-behavior="live"
-            />
-          </div>
-          <div class="column is-one-third">
-            <FormulateInput
-              v-if="independent_worker"
-              type="text"
-              name="avg_payroll_monthly_independent"
-              label="Salaire mensuel moyen de l'indépendant (milliers de francs)"
-              validation="required|number"
-              value="0"
-              min="0"
-              error-behavior="live"
-            />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third">
-            <FormulateInput
-              type="text"
-              name="unemployement_rate"
-              label="Taux de chômage partiel"
-              validation="required|number"
-              value="0"
-              min="0"
-              max="100"
-              error-behavior="live"
-            />
-          </div>
-          <div class="column is-one-third">
-            <FormulateInput
-              v-if="independent_worker"
-              type="text"
-              name="unemployement_rate_independent"
-              label="Taux de chômage partiel de l'indépendant"
-              validation="required|number"
-              value="0"
-              min="0"
-              max="100"
-              error-behavior="live"
-            />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third">
             <FormulateInput
               type="text"
               name="employee_count"
@@ -120,6 +64,65 @@
         <div class="columns">
           <div class="column is-one-third">
             <FormulateInput
+              type="text"
+              name="avg_payroll"
+              :label="$t('avg_payroll_employees')"
+              validation="number"
+              value="0"
+              min="0"
+              error-behavior="live"
+              :disabled="avgPayrollMonthlyDisabled"
+            />
+          </div>
+          <div class="column is-one-third">
+            <FormulateInput
+              v-if="independent_worker"
+              type="text"
+              name="avg_payroll_independent"
+              label="Salaire mensuel moyen de l'indépendant (milliers de francs)"
+              validation="number"
+              value="0"
+              min="0"
+              error-behavior="live"
+            />
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-one-third">
+            <FormulateInput
+              type="text"
+              name="unemployement_rate"
+              label="Taux de chômage partiel"
+              validation="number"
+              value="0"
+              min="0"
+              max="100"
+              error-behavior="live"
+              :disabled="avgPayrollMonthlyDisabled"
+            />
+          </div>
+          <div class="column is-one-third">
+            <FormulateInput
+              v-if="independent_worker"
+              type="text"
+              name="unemployement_rate_independent"
+              label="Taux de chômage partiel de l'indépendant"
+              validation="number"
+              value="0"
+              min="0"
+              max="100"
+              error-behavior="live"
+            />
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-one-third">
+            <!--future container-->
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-one-third">
+            <FormulateInput
               type="submit"
               label="Rechercher mes aides"
               class="submitter"
@@ -128,30 +131,32 @@
         </div>
       </FormulateForm>
     </div>
-    <div class="columns">
+    <div class="columns" v-if="state_aid != undefined">
       <div class="column is-offset-one-fifth">
         <div class="columns">
           <div class="column">
             <h3 class="title is-3 result-title is-pulled-right">TOTAL :</h3>
           </div>
           <div class="column is-one-third results-heading">
-            <h3 class="title is-3 result-value is-pulled-right">120 kCHF</h3>
+            <h3 class="title is-3 result-value is-pulled-right">{{ state_aid.sum }} kCHF</h3>
           </div>
         </div>
-        <div class="columns">
+        <div 
+          class="columns" 
+          v-for="(value, aid) in state_aid.dict"
+          :key="aid">
           <div class="column">
-            <h3 class="title is-5 result-item-title is-pulled-right">Crédit transitoire max</h3>
+            <h3 class="title is-5 result-item-title is-pulled-right">{{ aid }}</h3>
           </div>
           <div class="column is-one-third result-item-value">
-            <h3 class="title is-5 is-pulled-right">20 kCHF</h3>
+            <h3 class="title is-5 is-pulled-right">{{ value }} kCHF</h3>
           </div>
         </div>
-        <div class="columns">
+        <div class="columns" v-if="state_aid.approxed">
           <div class="column">
-            <h3 class="title is-5 result-item-title is-pulled-right">APG pour l'employeur</h3>
+            <h3 class="title is-5 result-item-title is-pulled-right">Warning approximation</h3>
           </div>
           <div class="column is-one-third result-item-value">
-            <h3 class="title is-5 is-pulled-right">20 kCHF</h3>
           </div>
         </div>
       </div>
@@ -169,9 +174,28 @@ export default {
     algo: Object()
   },
   data () {
-    return { company_details: {} };
+    return { company_details: {'avg_payroll': 0}, state_aid: undefined };
   },
   computed: {
+    avgPayrollMonthlyDisabled() {
+      return this.company_details['employee_count'] == 0 && this.independent_worker;
+    },
+    avgPayrollMonthly() {
+      this.company_details;
+      return this.avgPayrollMonthlyDisabled ? 0 : this.company_details['avg_payroll'];
+    },
+    avgPayrollMonthlyIndependent() {
+      this.company_details;
+      return !this.independent_worker ? 0 : this.company_details['avg_payroll_independent'];
+    },
+    unemployementRate() {
+      this.company_details;
+      return this.avgPayrollMonthlyDisabled ? 0 : this.company_details['unemployement_rate'];
+    },
+    unemployementRateIndependent() {
+      this.company_details;
+      return !this.independent_worker ? 0 : this.company_details['unemployement_rate_independent'];
+    },
     independent_worker: {
       // getter
       get: function () {
@@ -179,6 +203,7 @@ export default {
       },
       // setter
       set: function (newValue) {
+        window.independent_worker = newValue;
         this.company_details['independent_worker'] = newValue;
       }
     },
@@ -208,12 +233,44 @@ export default {
       const revenue = data.avg_rev_monthly;
       const isIndependent = data.independent_worker;
       const unemployement_rate = data.unemployement_rate;
-      const payroll = data.avg_payroll_monthly;
+      const payroll = data.avg_payroll;
       const employees = data.employee_count;
       console.log("OK " + revenue + ", " + isIndependent + ", " + unemployement_rate + ", " + payroll + ", " + employees);
-      var credit, rht = this.$props.algo.covidaid(revenue, isIndependent, unemployement_rate, payroll, employees);
-      console.log(credit, rht);
       
+      var input = {};
+      input['corp_form'] = data['corp_form'];
+      input['independent_worker'] = this.independent_worker;
+      input['zip_code'] = data['zip_code'];
+      input['employee_count'] = data['employee_count'];
+      input['avg_payroll'] = this.avgPayrollMonthly;
+      input['avg_payroll_independent'] = this.avgPayrollMonthlyIndependent;
+      input['avg_revenue'] = data['avg_rev_monthly'];
+      input['unemployement_rate'] = this.unemployementRate / 100;
+      input['unemployement_rate_independent'] = this.unemployementRateIndependent / 100;
+      var state_aid = this.$props.algo.covidaid(input);
+      console.log(state_aid);
+      
+      const approxed = state_aid.rht_approx;
+      delete state_aid.rht_approx;
+      
+      var sum = 0;
+      sum += state_aid.rht;
+      sum += state_aid.apg;
+      sum += state_aid.credit;
+      
+      var aid_list = {};
+      for (var key in state_aid) {
+        var value = state_aid[key];
+        if (value != 0) {
+          aid_list[key] = value;
+        }
+      }
+      
+      this.state_aid = {
+        sum: sum,
+        dict: aid_list,
+        approxed: approxed
+      };
       
     }
   }

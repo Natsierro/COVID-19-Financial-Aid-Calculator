@@ -8,7 +8,7 @@
     "hello": "bonjour!",
     "selected": "Français sélectionné",
     "corp_form": "Raison sociale",
-    "avg_payroll_monthly_employees": "Masse salariale mensuelle moyenne (milliers de francs)",
-    "avg_payroll_monthly_independentsemployees": "Masse salariale mensuelle moyenne (milliers de francs)"
+    "avg_payroll_employees": "Masse salariale mensuelle moyenne (milliers de francs)",
+    "avg_payroll_independentsemployees": "Masse salariale mensuelle moyenne (milliers de francs)"
   }
 }
