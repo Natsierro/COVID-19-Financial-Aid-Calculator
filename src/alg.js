@@ -89,7 +89,7 @@ function covidaid(input){
    result['credit'] = Credits(input['avg_revenue']);
 
     if(input['employee_count']==0){
-        result['rht'] = Math.min(t*3.32,RHT(input['avg_payroll'],input['unemployement_rate']));
+        result['rht'] = Math.min(input['unemployement_rate']*3.32,RHT(input['avg_payroll'],input['unemployement_rate']));
         result['rht_approx'] = false;
     }
     else{
