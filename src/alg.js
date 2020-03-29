@@ -48,28 +48,37 @@ function Credits(CA){
 function location(zipcode, language){
     var city_name = "";
     var canton_name = "";
+    var canton_abbrev = "";
+    var canton_info = {};
+    var canton_links = {};
+    var city_info = {};
+    var city_links = {};
     
     var search = new ZipcodeSearch();
     var location = search.findbyZipcode(zipcode);
-    console.log(location);
-    return;
+    
     if(location){
         var manager = new CantonManager();
         var canton = manager.getByAbbreviation(location.canton);
 
         city_name = location.community_name;
         canton_name = canton.setLanguage(language).getName();
+        canton_abbrev = location.canton;
+        
+        canton_info = canton_ressources.find(canton_ressources => {
+            return canton_ressources.canton === canton_abbrev
+        })
+        canton_links = canton_info !== undefined ? canton_info.link_infos : false
+
+        city_info = city_ressources.find(city_ressources => {
+            return city_ressources.city === city_name
+        })
+        city_links = city_info !== undefined ? city_info.link_infos : false
+        
+        return {city_name: city_name, canton_abbrev: canton_abbrev, canton_name: canton_name, canton_links: canton_links, city_links: city_links};
     }
 
-    var canton_info = canton_ressources.find(canton_ressources => {
-        return canton_ressources.canton === canton_name
-      })
-
-    var city_info = city_ressources.find(city_ressources => {
-        return city_ressources.city === city_name
-        })
-
-    return [city_name, canton_abbrev, canton_name, canton_info.link_infos, city_info.link_infos];
+    return false;
 }
 
 function covidaid(input){
