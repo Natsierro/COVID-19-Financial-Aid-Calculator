@@ -42,15 +42,28 @@
           min="0"
           error-behavior="live"
         />
+        <div class="nextby">
         <FormulateInput
           type="text"
           name="avg_payroll_monthly"
-          label="Masse salariale mensuelle moyenne (milliers de francs)"
+          :label="(!independent_worker) ? $t('avg_payroll_monthly_employees') : $t('avg_payroll_monthly_independentsemployees')"
           validation="required|number"
           value="0"
           min="0"
           error-behavior="live"
         />
+        <FormulateInput
+          type="text"
+          name="avg_payroll_monthly_independent"
+          label="Salaire mensuel moyen de l'indépendant (milliers de francs)"
+          validation="required|number"
+          value="0"
+          min="0"
+          error-behavior="live"
+          v-if="independent_worker"
+        />
+        </div>
+        <div class="nextby">
         <FormulateInput
           type="text"
           name="unemployement_rate"
@@ -61,6 +74,18 @@
           max="100"
           error-behavior="live"
         />
+        <FormulateInput
+          type="text"
+          name="unemployement_rate_independent"
+          label="Taux de chômage partiel de l'indépendant"
+          validation="required|number"
+          value="0"
+          min="0"
+          max="100"
+          error-behavior="live"
+          v-if="independent_worker"
+        />
+        </div>
         <FormulateInput
           type="submit"
           label="Rechercher mes aides"
