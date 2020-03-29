@@ -71,12 +71,11 @@ function location(zipcode){
     return [city_name, canton_name, canton_info.link_infos, city_info.link_infos];
 }
 
-function covidaid(CA, independant, t, m, employees){
+function covidaid(CA, t, m, employees){
     /*
         will calculate and return all the information needed to the frontend about the possible aid for the employees
         VARIABLES:
             CA: Average monthly revenue (INT in CHF)
-            indepandant: Boolean telling if the applicant has the independant status or not
             t: The percentage of the economic activity being stopped because of the COVID 19
             m: mass of all salaries (monthly)
             employees: number of employees
