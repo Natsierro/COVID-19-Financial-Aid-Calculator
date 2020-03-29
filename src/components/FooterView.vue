@@ -35,10 +35,7 @@
 
 <script>
 export default {
-  name: 'FooterView',
-  props: {
-    msg: String
-  }
+  name: 'FooterView'
 }
 </script>
 

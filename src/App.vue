@@ -4,9 +4,9 @@
     class="main"
   >
     <TopBar />
-    <HeaderView msg="Welcome to Your Vue.js App" />
+    <HeaderView />
     <MainForm :algo="algo" />
-    <FooterView msg="Welcome to Your Vue.js App" />
+    <FooterView />
   </div>
 </template>
 

@@ -16,14 +16,14 @@
 
 <script>
 export default {
-  name: 'HeaderView',
-  props: {
-    msg: String
-  }
+  name: 'HeaderView'
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.section {
+  background-color: rgba(221, 208, 198, 0.5);
+  padding-bottom: 1.5rem;
+}
 </style>
