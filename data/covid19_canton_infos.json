@@ -1,0 +1,106 @@
+[
+    {
+        "canton": "AG",
+        "link_infos": "https://www.ag.ch/de/dvi/wirtschaft_arbeit/departement_teaser_6.jsp"
+    },
+    {
+        "canton": "AI",
+        "link_infos": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit"
+    },
+    {
+        "canton": "AR",
+        "link_infos": "https://www.ar.ch/verwaltung/departement-bau-und-volkswirtschaft/arbeitslosenversicherung-ar/"
+    },
+    {
+        "canton": "BE",
+        "link_infos": "https://www.vol.be.ch/vol/fr/index/arbeit.html"
+    },
+    {
+        "canton": "BL",
+        "link_infos": "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/kiga"
+    },
+    {
+        "canton": "BS",
+        "link_infos": "https://www.awa.bs.ch/"
+    },
+    {
+        "canton": "FR",
+        "link_infos": "https://www.fr.ch/spe"
+    },
+    {
+        "canton": "GE",
+        "link_infos": "https://www.ge.ch/organisation/office-cantonal-emploi-oce"
+    },
+    {
+        "canton": "GL",
+        "link_infos": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/wirtschaft-und-arbeit.html/1039"
+    },
+    {
+        "canton": "GR",
+        "link_infos": "https://www.gr.ch/DE/institutionen/verwaltung/dvs/kiga/Seiten/home.aspx"
+    },
+    {
+        "canton": "JU",
+        "link_infos": "https://www.jura.ch/fr/Autorites/Administration/DES/SEE.html"
+    },
+    {
+        "canton": "LU",
+        "link_infos": "https://wira.was-luzern.ch/"
+    },
+    {
+        "canton": "NE",
+        "link_infos": "https://www.ne.ch/autorites/DEAS/SEMP/Pages/accueil.aspx"
+    },
+    {
+        "canton": "NW",
+        "link_infos": "https://www.nw.ch/arbeitsamt/314"
+    },
+    {
+        "canton": "OW",
+        "link_infos": "https://www.ow.ch/de/verwaltung/aemter/?amt_id=161"
+    },
+    {
+        "canton": "SG",
+        "link_infos": "https://www.sg.ch/politik-verwaltung/departemente-und-staatskanzlei/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit.html"
+    },
+    {
+        "canton": "SH",
+        "link_infos": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Volkswirtschaftsdepartement/Arbeitsamt-3858-DE.html"
+    },
+    {
+        "canton": "SO",
+        "link_infos": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/"
+    },
+    {
+        "canton": "SZ",
+        "link_infos": "https://www.sz.ch/unternehmen/arbeit-gewerbeaufsicht/arbeit.html/72-443-4443-1877"
+    },
+    {
+        "canton": "TG",
+        "link_infos": "https://awa.tg.ch/"
+    },
+    {
+        "canton": "TI",
+        "link_infos": "https://www4.ti.ch/dfe/de/mercato-del-lavoro/"
+    },
+    {
+        "canton": "UR",
+        "link_infos": "https://www.ur.ch/aemter/853"
+    },
+    {
+        "canton": "VD",
+        "link_infos": "https://www.vd.ch/toutes-les-autorites/departements/departement-de-leconomie-de-linnovation-et-du-sport-deis/service-de-lemploi-sde/"
+    },
+    {
+        "canton": "VS",
+        "link_infos": "https://www.vs.ch/fr/web/sict"
+    },
+    {
+        "canton": "ZG",
+        "link_infos": "https://www.zg.ch/behoerden/volkswirtschaftsdirektion/amt-fur-wirtschaft-und-arbeit"
+    },
+    {
+        "canton": "ZH",
+        "link_infos": "https://awa.zh.ch/internet/volkswirtschaftsdirektion/awa/de/home.html"
+    }
+]

@@ -2,6 +2,9 @@
 import ZipcodeSearch from 'js-swiss-cantons/src';
 import CantonManager from 'js-swiss-cantons/src';
 
+
+var canton_ressources = require('.data/covid19_canton_infos.json');
+var city_ressources = require('.data/covid19_city_infos.json');
 var language = 'fr';
 
 function RHT(m, t){
@@ -43,21 +46,7 @@ function Credits(CA){
     }
 }
 
-function covidaid(firm, CA, independant, zipcode, t, m, employees){
-    /*
-        will calculate and return all the information needed to the frontend about the possible aid for the employees
-        VARIABLES:
-            firm: "Entreprise individuelle", "Société en nom collectif", "SARL", "SA", "Société en commandite"
-            CA: Average monthly revenue (INT in CHF)
-            indepandant: Boolean telling if the applicant has the independant status or not
-            zipcode: Zipcode of the city where the firm is
-            t: The percentage of the economic activity being stopped because of the COVID 19
-            m: mass of all salaries (monthly)
-            employees: number of employees
-    */
-    var rht = 0;
-    var apg = 0;
-    var credit = 0;
+function location(zipcode){
     var city_name = "";
     var canton_name = "";
    
@@ -67,185 +56,79 @@ function covidaid(firm, CA, independant, zipcode, t, m, employees){
         var manager = new CantonManager();
         var canton = manager.getByAbbreviation(location.canton);
 
-        city_name = location.city_name;
+        city_name = location.community_name;
         canton_name = canton.setLanguage(language).getName();
     }
-    
-    /*
-        Comment:    The partner of the chief can have a maximum of 3320 CHF for a 100% as RHT
-                    The temporar workers & apprentices can also have the classic RHT 
-    */
-    if(firm=="Entreprise individuelle"){
-        /*
-            Comment:    The number of subsidies is limited to 10 per month for the people in quarantine
-                        If take on managerial tasks the number of subsidies is limited to 30
-        */
-        if(employees==0){
-            credit = Credits(CA);
-        }
-        else{
-            rht = RHT(m,t); //for the employees
-            apg = APG(CA,t);
-            credit = Credits(CA);
-        } 
-    }
 
-    else{
-        if(employees==0){
-            credit = Credits(CA);
-        }
-        else{
-            rht = RHT(m,t);
-            credit = Credits(CA);
-        }
-        
-    }
+    var canton_info = jsObjects.find(canton_ressources => {
+        return canton_ressources.canton === canton_name
+      })
+
+    var city_info = jsObjects.find(city_ressources => {
+        return city_ressources.city === city_name
+        })
+
+    return city_name, canton_name, canton_info.link_infos, city_info.link_infos
 }
 
-function covidaid_self(firm, CA, independant, zipcode, t, m){
+function covidaid(CA, independant, t, m, employees){
     /*
-        will calculate and return all the information needed to the frontend about the possible aid to the employer
+        will calculate and return all the information needed to the frontend about the possible aid for the employees
         VARIABLES:
-            firm: "Entreprise individuelle", "Société en nom collectif", "SARL", "SA", "Société en commandite"
             CA: Average monthly revenue (INT in CHF)
             indepandant: Boolean telling if the applicant has the independant status or not
-            zipcode: Zipcode of the city where the firm is
             t: The percentage of the economic activity being stopped because of the COVID 19
             m: mass of all salaries (monthly)
             employees: number of employees
     */
     var rht = 0;
-    var apg = 0;
+    var credit = 0;
     
     /*
         Comment:    The partner of the chief can have a maximum of 3320 CHF for a 100% as RHT
                     The temporar workers & apprentices can also have the classic RHT 
     */
-    if(firm=="Entreprise individuelle"){
-        /*
-            Comment:    The number of subsidies is limited to 10 per month for the people in quarantine
-                        If take on managerial tasks the number of subsidies is limited to 30
-        */
 
-        apg = APG(CA,t); //Warning, not applicable for every sector
+   credit = Credits(CA);
+
+    if(employees==0){
+
     }
-
     else{
-        if(independant){
-            rht = min(3320,RHT(m,t));
-        }
-        else{
-            rht = RHT(m,t);
-        }
-        
-    }
+        rht = RHT(m,t); //for the employees
+    } 
 
+        
+    return credit, rht
 }
 
-var canton_ressources = [
-    {
-        "canton": "AG",
-        "link": "https://www.ag.ch/de/dvi/wirtschaft_arbeit/departement_teaser_6.jsp"
-    },
-    {
-        "canton": "AI",
-        "link": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit"
-    },
-    {
-        "canton": "AR",
-        "link": "https://www.ar.ch/verwaltung/departement-bau-und-volkswirtschaft/arbeitslosenversicherung-ar/"
-    },
-    {
-        "canton": "BE",
-        "link": "https://www.vol.be.ch/vol/fr/index/arbeit.html"
-    },
-    {
-        "canton": "BL",
-        "link": "https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/kiga"
-    },
-    {
-        "canton": "BS",
-        "link": "https://www.awa.bs.ch/"
-    },
-    {
-        "canton": "FR",
-        "link": "https://www.fr.ch/spe"
-    },
-    {
-        "canton": "GE",
-        "link": "https://www.ge.ch/organisation/office-cantonal-emploi-oce"
-    },
-    {
-        "canton": "GL",
-        "link": "https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/wirtschaft-und-arbeit.html/1039"
-    },
-    {
-        "canton": "GR",
-        "link": "https://www.gr.ch/DE/institutionen/verwaltung/dvs/kiga/Seiten/home.aspx"
-    },
-    {
-        "canton": "JU",
-        "link": "https://www.jura.ch/fr/Autorites/Administration/DES/SEE.html"
-    },
-    {
-        "canton": "LU",
-        "link": "https://wira.was-luzern.ch/"
-    },
-    {
-        "canton": "NE",
-        "link": "https://www.ne.ch/autorites/DEAS/SEMP/Pages/accueil.aspx"
-    },
-    {
-        "canton": "NW",
-        "link": "https://www.nw.ch/arbeitsamt/314"
-    },
-    {
-        "canton": "OW",
-        "link": "https://www.ow.ch/de/verwaltung/aemter/?amt_id=161"
-    },
-    {
-        "canton": "SG",
-        "link": "https://www.sg.ch/politik-verwaltung/departemente-und-staatskanzlei/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit.html"
-    },
-    {
-        "canton": "SH",
-        "link": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Volkswirtschaftsdepartement/Arbeitsamt-3858-DE.html"
-    },
-    {
-        "canton": "SO",
-        "link": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/"
-    },
-    {
-        "canton": "SZ",
-        "link": "https://www.sz.ch/unternehmen/arbeit-gewerbeaufsicht/arbeit.html/72-443-4443-1877"
-    },
-    {
-        "canton": "TG",
-        "link": "https://awa.tg.ch/"
-    },
-    {
-        "canton": "TI",
-        "link": "https://www4.ti.ch/dfe/de/mercato-del-lavoro/"
-    },
-    {
-        "canton": "UR",
-        "link": "https://www.ur.ch/aemter/853"
-    },
-    {
-        "canton": "VD",
-        "link": "https://www.vd.ch/toutes-les-autorites/departements/departement-de-leconomie-de-linnovation-et-du-sport-deis/service-de-lemploi-sde/"
-    },
-    {
-        "canton": "VS",
-        "link": "https://www.vs.ch/fr/web/sict"
-    },
-    {
-        "canton": "ZG",
-        "link": "https://www.zg.ch/behoerden/volkswirtschaftsdirektion/amt-fur-wirtschaft-und-arbeit"
-    },
-    {
-        "canton": "ZH",
-        "link": "https://awa.zh.ch/internet/volkswirtschaftsdirektion/awa/de/home.html"
+function covidaid_self(CA, independant, t, m){
+    /*
+        will calculate and return all the information needed to the frontend about the possible aid to the employer
+        VARIABLES:
+            CA: Average monthly revenue (INT in CHF)
+            indepandant: Boolean telling if the applicant has the independant status or not
+            t: The percentage of the economic activity being stopped because of the COVID 19
+            m: mass of all salaries (monthly)
+    */
+    var rht = 0;
+    var apg = 0;
+    
+    /*
+        Comment:    aux personnes qui, au sein de l'entreprise, occupent une position assimilable à celle de l'employeur (par exemple des associés d'une Sàrl qui travaillent contre rémunération, des personnes travaillant dans l'entreprise de leur conjoint ou de leur partenaire enregistré). Dans ce dernier cas, une somme forfaitaire de 3'320 francs est octroyée pour un emploi à plein temps
+    */
+    /*
+        Comment:    The number of subsidies is limited to 10 per month for the people in quarantine
+                    If take on managerial tasks the number of subsidies is limited to 30
+    */
+
+    if(independant){    
+        apg = APG(CA,t); //Warning, not applicable for every sector
     }
-];
+    else{
+        rht = min(t*3320,RHT(m,t));
+    }
+    
+    return rht, apg
+}
 
