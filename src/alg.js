@@ -95,7 +95,7 @@ function covidaid(input){
     else{
         result['rht'] = RHT(input['avg_payroll'],input['unemployement_rate']);
     }
-    if(input[independent_worker]){    
+    if(input['independent_worker']){    
         result['apg'] = APG(input['avg_payroll_independent'],input['unemployement_rate_independent']);
     }
 
