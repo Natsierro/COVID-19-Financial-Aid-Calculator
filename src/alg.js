@@ -86,17 +86,17 @@ function covidaid(input){
                     The temporar workers & apprentices can also have the classic RHT 
     */
 
-   result[credit] = Credits(input[avg_revenue]);
+   result['credit'] = Credits(input['avg_revenue']);
 
-    if(input[employee_count]==0){
-        result[rht] = min(t*3.32,RHT(input[avg_payroll],input[unemployement_rate]));
-        result[rht_approx] = false;
+    if(input['employee_count']==0){
+        result['rht'] = min(t*3.32,RHT(input['avg_payroll'],input['unemployement_rate']));
+        result['rht_approx'] = false;
     }
     else{
-        result[rht] = RHT(input[avg_payroll],input[unemployement_rate]);
+        result['rht'] = RHT(input['avg_payroll'],input['unemployement_rate']);
     }
     if(input[independent_worker]){    
-        result[apg] = APG(input[avg_payroll_independent],input[unemployement_rate_independent]);
+        result['apg'] = APG(input['avg_payroll_independent'],input['unemployement_rate_independent']);
     }
 
     
