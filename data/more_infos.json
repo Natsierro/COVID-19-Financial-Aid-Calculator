@@ -6,6 +6,12 @@
             "de": "Selbständig Erwerbende, die wegen behördlichen Massnahmen zur Bekämpfung des Coronavirus Erwerbsausfälle erleiden, werden entschädigt, sofern nicht bereits eine Entschädigung oder Versicherungsleistung besteht. Eine Entschädigung ist für folgende Fälle vorgesehen:\n\n- Schulschliessungen\n- Ärztlich verordnete Quarantäne\n- Schliessung eines selbstständig geführten öffentlich zugänglichen Betriebes\nDie Regelung gilt auch für freischaffende Künstlerinnen und Künstler, die einen Erwerbsunterbruch erleiden, weil ihre Engagements wegen der Massnahmen gegen das Coronavirus annulliert werden oder weil sie einen eigenen Anlass absagen müssen.",
             "it": "I lavoratori indipendenti che subiscono una perdita di guadagno a causa delle misure decise dalle autorità per combattere il coronavirus saranno indennizzati, a condizione che non ricevano già altre indennità o prestazioni assicurative. I casi contemplati sono i seguenti:\n\n- chiusura delle scuole\n- quarantena ordinata dal medico\n- chiusura di un esercizio a conduzione personale e accessibile al pubblico\nQuesta regola vale anche per gli artisti indipendenti costretti a interrompere l’attività lavorativa perché gli ingaggi vengono cancellati in seguito alle suddette misure o perché devono essi stessi cancellare un evento in programma.",
             "en": "Self-employed persons who suffer a loss of earnings due to government measures to combat the coronavirus will be compensated if they do not already receive compensation or insurance benefits. Compensation is provided in the following cases:\n\n- closure of schools;\n- quarantine ordered by a doctor;\n- closure of an independently managed school open to the public.\nThe regulations also apply to independent artists who have suffered a loss of earnings because their engagement has been cancelled due to measures to combat the coro-navirus or because they have had to cancel an independently organised event."
+        },
+        "form":{
+            "fr": "https://www.ahv-iv.ch/fr/Nouvelles-Infos/post/corona-erwerbsersatzentschaedigung-formular-merkblaetter-etc-sind-bereit",
+            "de": "https://www.ahv-iv.ch/de/News-Infos/post/corona-erwerbsersatzentschaedigung-formular-merkblaetter-etc-sind-bereit",
+            "it": "https://www.ahv-iv.ch/it/Novit%C3%A0-Infos/post/corona-erwerbsersatzentschaedigung-formular-merkblaetter-etc-sind-bereit",
+            "en": "https://www.ahv-iv.ch/en/News-Infos/post/corona-erwerbsersatzentschaedigung-formular-merkblaetter-etc-sind-bereit"
         }
 
     },
@@ -16,6 +22,34 @@
             "de": "Ausweitung und Vereinfachung Kurzarbeit\nNeu kann die Kurzarbeitsentschädigung auch für Angestellte in befristeten Arbeitsverhältnissen und für Personen im Dienste einer Organisation für Temporärarbeit ausgerichtet werden. Neu soll der Arbeitsausfall auch für Personen, die in einem Lehrverhältnis stehen, anrechenbar werden. Ausserdem kann Kurzarbeitsentschädigung neu auch für arbeitgeberähnliche Angestellte ausgerichtet werden. Personen, die im Betrieb des Ehegatten bzw. des eingetragenen Partners mitarbeiten, können nun auch von Kurzarbeitsentschädigungen profitieren. Sie sollen eine Pauschale von 3320.- Franken als Kurzarbeitsentschädigung für eine Vollzeitstelle geltend machen können.",
             "it": "Estensione e semplificazione del lavoro ridotto\nL’ILR potrà essere erogata anche ai dipendenti con un contratto a tempo determinato e a coloro che sono al servizio di un’agenzia di lavoro interinale. La perdita di lavoro sarà riconosciuta anche alle persone con un contratto di apprendistato. L’ILR potrà essere erogata anche a coloro che occupano una posizione analoga a quella del datore di lavoro. Ora anche le persone che lavorano nell’azienda del coniuge o del partner registrato possono beneficiare dell’indennità per lavoro ridotto e far valere un importo forfetario di 3320 franchi a titolo di ILR per un posto a tempo pieno.",
             "en": "Extension of short-time working and simplification of procedures\nShort-time working can now also be granted to employees with a limited period of employment and to persons working for a temporary work organisation. The loss of work will also be counted for people who are on an apprenticeship. Short-time work may be granted to persons who occupy a position comparable to that of an employer. Persons working in the company of their spouse or registered partner may also benefit from partial unemployment and claim a lump-sum compensation of CHF 3,320 for a full-time position."
+        },
+        "form":{
+            "AG":"https://www.ag.ch/de/dvi/wirtschaft_arbeit/unternehmen/zuschuesse___entschaedigungen/kurzarbeitsentschaedigung_beantragen/kurzarbeitsentschaedigung_beantragen_1.jsp?sectionId=172314-798951215&accordId=0#accordion--172314-798951215__panel0",
+            "AI":"https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/kurzarbeits-und-schlechtwetterentschaedigung/kurzarbeitsentschaedigung",
+            "AR":"https://www.ar.ch/verwaltung/departement-bau-und-volkswirtschaft/arbeitslosenversicherung-ar/neues-coronavirus-kurzarbeitsentschaedigung/",
+            "BE":"https://www.vol.be.ch/vol/de/index/arbeit/arbeitsmarkt/kurzarbeitsentschaedigung.html",
+            "BL":"https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/kiga/offentliche-arbeitslosenkasse/kurzarbeit-im-zusammenhang-mit-dem-coronavirus",
+            "BS":"https://www.awa.bs.ch/arbeitgebende-unternehmen/finanzielle-unterstuetzung/kurzarbeitsentschaedigung.html",
+            "FR":"https://www.fr.ch/spe/travail-et-entreprises/chomage/reduction-dhoraire-de-travail-rht",
+            "GE": "https://www.ge.ch/actualite/covid-19-votre-entreprise-subit-perte-travail-18-03-2020",
+            "GL":"https://www.gl.ch/verwaltung/volkswirtschaft-und-inneres/wirtschaft-und-arbeit/arbeit/arbeitsamt/kurzarbeit.html/1007",
+            "GR":"https://www.gr.ch/DE/institutionen/verwaltung/dvs/kiga/dienstleistungen/unternehmen/Seiten/kurzarbeit.aspx",
+            "JU":"https://www.jura.ch/fr/Autorites/Coronavirus/Economie-et-emploi.html",
+            "LU":"https://wira.was-luzern.ch/bereiche/kast-und-recht/kurzarbeitsentschaedigung/",
+            "NE":"https://www.ne.ch/autorites/DFS/SCSP/medecin-cantonal/maladies-vaccinations/Pages/Covid-19-employeurs.aspx#1",
+            "NW":"https://www.nw.ch/arbeitsamtdienste/1298",
+            "OW":"https://www.ow.ch/de/kanton/publired/merkblaetter/?action=info&pubid=19684",
+            "SG":"https://www.sg.ch/wirtschaft-arbeit/arbeitgebende/kurzarbeit-anmelden.html",
+            "SH":"http://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Verwaltung/Volkswirtschaftsdepartement/Arbeitsamt/Arbeitgeber-und-Unternehmen/Kurzarbeits--und-Schlechtwetterentsch-digung-1297588-DE.html",
+            "SO":"https://corona.so.ch/wirtschaft/inhabergeschaeftsfuehrer-gmbh-oder-ag/",
+            "SZ":"https://www.sz.ch/unternehmen/arbeit-gewerbeaufsicht/arbeitslosenversicherung/kurzarbeitsentschaedigung.html/72-443-4443-1832-1827",
+            "TG":"https://awa.tg.ch/arbeitgebende/finanzielle-leistungen/kurzarbeitsentschaedigung.html/3321",
+            "TI":"https://www.pform2.ti.ch/form/wizard/instance-resource-id/42/instance-id/-1/form-id/30",
+            "UR":"https://www.ur.ch/dienstleistungen/3293",
+            "VD":"https://www.vd.ch/themes/economie/employeurs/indemnite-pour-reduction-de-lhoraire-de-travail-dans-le-cadre-de-lepidemie-de-coronavirus-2019-ncov/",
+            "VS":"https://www.vs.ch/web/sict/rht",
+            "ZG":"https://www.zg.ch/behoerden/volkswirtschaftsdirektion/amt-fur-wirtschaft-und-arbeit",
+            "ZH":"https://awa.zh.ch/internet/volkswirtschaftsdirektion/awa/de/arbeitslosenversicherung/kurzarbeit.html"
         }
     },
     {
@@ -24,7 +58,13 @@
             "fr": "Aide immédiate sous la forme de crédits transitoires spécifique\nLes montants jusqu’à 0,5 million de francs seront versés immédiatement par les banques et seront couverts en totalité par la garantie de la Confédération. Cette garantie sera ramenée à 85 % pour les montants dépassant ce plafond, qui devront alors faire l’objet d’un bref examen par les banques. Les montants jusqu’à 0,5 million devraient couvrir les besoins de plus de 90 % des entreprises touchées par les conséquences de l’épidémie de coronavirus.",
             "de": "Liquiditätshilfen für Unternehmen\nDabei sollen Beträge bis zu 0,5 Millionen CHF von den Banken sofort ausbezahlt werden und vom Bund zu 100% garantiert werden. Darüber hinaus gehende Beträge sollen vom Bund zu 85% garantiert werden und eine kurze Bankprüfung voraussetzen. Die Kreditbeträge bis zu 0,5 Millionen CHF dürften über 90 Prozent der von COVID betroffenen Unternehmen abdecken.",
             "it": "Liquidità per aiutare le imprese\nGli importi fino a 0,5 milioni di franchi saranno pagati subito dalle banche e garantiti al 100 per cento dalla Confederazione. Gli importi di entità superiore saranno garantiti all’85 per cento dalla Confederazione e subordinati a una breve analisi bancaria. Gli importi creditizi fino a 0,5 milioni di franchi dovrebbero coprire oltre il 90 per cento delle imprese colpite dal COVID.",
-            "en": "Immediate assistance in the form of specific transitional credits\nAmounts up to CHF 0.5 million swiss francs will be paid out immediately by the banks and will be fully covered by the federal guarantee. This guarantee will be reduced to 85% for amounts exceeding this ceiling, which will then have to be briefly reviewed by the banks. Amounts up to CHF 0.5 million should cover the needs of more than 90% of the companies affected by the consequences of the coronavirus epidemic."
+            "en": "Immediate assistance in the form of specific bridging loans\nAmounts up to CHF 0.5 million swiss francs will be paid out immediately by the banks and will be fully covered by the federal guarantee. This guarantee will be reduced to 85% for amounts exceeding this ceiling, which will then have to be briefly reviewed by the banks. Amounts up to CHF 0.5 million should cover the needs of more than 90% of the companies affected by the consequences of the coronavirus epidemic."
+        },
+        "form":{
+            "fr": "https://www.easygov.swiss/easygov/#/fr/landing/covid",
+            "de": "https://www.easygov.swiss/easygov/#/fr/landing/covid",
+            "it": "https://www.easygov.swiss/easygov/#/it/landing/covid",
+            "en": "https://www.easygov.swiss/easygov/#/en/landing/covid"
         }
     },
     {
