@@ -46,7 +46,29 @@ function Credits(CA){
     }
 }
 
-function location(zipcode, language){
+function location(zipcode, language) {
+    var city_name = "";
+    var canton_name = "";
+    var canton_abbrev = "";
+    
+    var search = new ZipcodeSearch();
+    var location = search.findbyZipcode(zipcode);
+    
+    if(location){
+        var manager = new CantonManager();
+        var canton = manager.getByAbbreviation(location.canton);
+
+        city_name = location.community_name;
+        canton_name = canton.setLanguage(language).getName();
+        canton_abbrev = location.canton;
+        
+        return {city_name: city_name, canton_abbrev: canton_abbrev, canton_name: canton_name};
+    }
+
+    return false;
+}
+
+function location_infos(zipcode, language){
     var city_name = "";
     var canton_name = "";
     var canton_abbrev = "";
@@ -152,4 +174,4 @@ function covidaid(input){
     return result;
 }
 
-export { covidaid, location };
+export { covidaid, location, location_infos };
