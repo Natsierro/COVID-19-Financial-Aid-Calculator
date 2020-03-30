@@ -92,24 +92,25 @@ function location_infos(zipcode, language){
     rht_info = more_ressources.find(more_ressources => {
         return more_ressources.type === 'RHT'
     })
-    rht_infos.text = rht_info.text.language !== undefined ? rht_info.text.language : false
+
+    rht_infos.text = rht_info.text[language] !== undefined ? rht_info.text[language] : false
 
     apg_info = more_ressources.find(more_ressources => {
         return more_ressources.type === 'APG'
     })
-    apg_infos.form = apg_info.form.language !== undefined ? apg_info.form.language : false
-    apg_infos.text = apg_info.text.language !== undefined ? apg_info.text.language : false
+    apg_infos.form = apg_info.form[language] !== undefined ? apg_info.form[language] : false
+    apg_infos.text = apg_info.text[language] !== undefined ? apg_info.text[language] : false
 
     credit_info = more_ressources.find(more_ressources => {
         return more_ressources.type === 'Credit'
     })
-    credit_infos.form = credit_info.form.language !== undefined ? credit_info.form.language : false
-    credit_infos.text = credit_info.text.language !== undefined ? credit_info.text.language : false
+    credit_infos.form = credit_info.form[language] !== undefined ? credit_info.form[language] : false
+    credit_infos.text = credit_info.text[language] !== undefined ? credit_info.text[language] : false
 
     all_info = more_ressources.find(more_ressources => {
         return more_ressources.type === 'all'
     })
-    all_infos.text = all_info.text.language !== undefined ? all_info.text.language : false
+    all_infos.text = all_info.text[language] !== undefined ? all_info.text[language] : false
     
     if(location){
         var manager = new CantonManager();
@@ -132,7 +133,7 @@ function location_infos(zipcode, language){
         rht_info = more_ressources.find(more_ressources => {
             return more_ressources.type === 'RHT'
         })
-        rht_infos.form = rht_info.form.canton_abbrev !== undefined ? rht_info.form.canton_abbrev : false
+        rht_infos.form = rht_info.form[canton_abbrev] !== undefined ? rht_info.form[canton_abbrev] : false
         
         return {city_name: city_name, canton_abbrev: canton_abbrev, canton_name: canton_name, canton_links: canton_links, city_links: city_links, rht_infos: rht_infos, apg_infos: apg_infos, credit_infos: credit_infos, all_infos: all_infos};
     }
