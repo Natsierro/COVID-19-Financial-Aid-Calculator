@@ -21,7 +21,7 @@
           <div class="column is-one-third">
             <FormulateInput
               v-model="independent_worker"
-              class="independent_worker"
+              class="offset_inlinecolumn"
               type="checkbox"
               name="independent_worker"
               label="Indépendant"
@@ -40,7 +40,15 @@
               inputmode="numeric"
               pattern="[0-9]*"
               :validation="['required', ['matches', /^[1-9]{1}[0-9]{3}$/]]"
+              class="npafield"
             />
+          </div>
+          <div class="column is-one-third">
+            <p class="offset_inlinecolumn largeoffset">{{ computedLocality }}</p>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-one-third">
             <FormulateInput
               type="text"
               name="avg_rev_monthly"
@@ -207,6 +215,15 @@ export default {
         this.company_details['independent_worker'] = newValue;
       }
     },
+    computedLocality() {
+      var zipCode = this.company_details['zip_code'];
+      var localityInfo = this.$props.algo.location(zipCode, this.$i18n.locale);
+
+      if (localityInfo) {
+        return localityInfo.city_name + ", " + localityInfo.canton_abbrev;
+      }
+      return "Ce NPA est introuvable.";
+    },
     values () {
       if (this.submittedValues) {
         return this.submittedValues;
@@ -230,12 +247,6 @@ export default {
   methods: {
     compute_aids (data) {
       this.submittedValues = data;
-      const revenue = data.avg_rev_monthly;
-      const isIndependent = data.independent_worker;
-      const unemployement_rate = data.unemployement_rate;
-      const payroll = data.avg_payroll;
-      const employees = data.employee_count;
-      console.log("OK " + revenue + ", " + isIndependent + ", " + unemployement_rate + ", " + payroll + ", " + employees);
       
       var input = {};
       input['corp_form'] = data['corp_form'];
@@ -247,8 +258,8 @@ export default {
       input['avg_revenue'] = data['avg_rev_monthly'];
       input['unemployement_rate'] = this.unemployementRate / 100;
       input['unemployement_rate_independent'] = this.unemployementRateIndependent / 100;
+      
       var state_aid = this.$props.algo.covidaid(input);
-      console.log(state_aid);
       
       const approxed = state_aid.rht_approx;
       delete state_aid.rht_approx;
@@ -285,9 +296,12 @@ export default {
 .nextby > div:nth-child(2) { 
   flex: 1;
 }
-.independent_worker {
-  margin-top:23px;
-  margin-left:30px;
+.offset_inlinecolumn {
+  margin-top:24px;
+  margin-left:20px;
+}
+.largeoffset {
+  margin-top:34px;
 }
 .section {
   padding-top: 1.5rem;
