@@ -146,11 +146,6 @@
                 class="submitter"
               />
             </div>
-            <div class="column is-one-third-desktop is-half-tablet">
-              <button @click="magicSubmit">
-                Magic!
-              </button>
-            </div>
           </div>
         </FormulateForm>
       </div>
@@ -258,7 +253,7 @@
               <td class="links-table-aid">
                 {{ $t(key) }} : {{ value.name }}
               </td>
-              <td><a :href="value.form">{{ value.link }}</a></td>
+              <td><a :href="value.link">{{ value.link }}</a></td>
             </tr>
           </table>
         </div>
@@ -330,19 +325,6 @@ export default {
     }
   },
   methods: {
-    magicSubmit() {
-      var input = {};
-      input['corp_form'] = "sa";
-      input['independent_worker'] = false;
-      input['zip_code'] = "1010";
-      input['employee_count'] = "10";
-      input['avg_payroll'] = "100";
-      input['avg_payroll_independent'] = 0;
-      input['avg_revenue'] = "180";
-      input['unemployement_rate'] = "60";
-      input['unemployement_rate_independent'] = 0;
-      this.compute_aids(input);
-    },
     submitForm (data) {
       this.submittedValues = data;
       
