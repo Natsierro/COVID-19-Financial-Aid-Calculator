@@ -58,6 +58,11 @@ function location(zipcode, language){
     var apg_infos = {text: "", form: ""};
     var credit_infos = {text: "", form: ""};
     var all_infos = {text: ""};
+
+    var rht_info = {};
+    var apg_info = {};
+    var credit_info = {};
+    var all_info = {};
     
     var search = new ZipcodeSearch();
     var location = search.findbyZipcode(zipcode);
