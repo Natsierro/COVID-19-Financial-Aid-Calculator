@@ -21,7 +21,7 @@
           <div class="column is-one-third">
             <FormulateInput
               v-model="independent_worker"
-              class="independent_worker"
+              class="offset_inlinecolumn"
               type="checkbox"
               name="independent_worker"
               label="Indépendant"
@@ -40,7 +40,15 @@
               inputmode="numeric"
               pattern="[0-9]*"
               :validation="['required', ['matches', /^[1-9]{1}[0-9]{3}$/]]"
+              class="npafield"
             />
+          </div>
+          <div class="column is-one-third">
+            <p class="offset_inlinecolumn largeoffset">{{ computedLocality }}</p>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-one-third">
             <FormulateInput
               type="text"
               name="avg_rev_monthly"
@@ -138,7 +146,7 @@
             <h3 class="title is-3 result-title is-pulled-right">TOTAL :</h3>
           </div>
           <div class="column is-one-third results-heading">
-            <h3 class="title is-3 result-value is-pulled-right">{{ state_aid.sum }} kCHF</h3>
+            <h3 class="title is-3 result-value is-pulled-right">{{ numberFormatter.format(state_aid.sum) }}</h3>
           </div>
         </div>
         <div 
@@ -149,7 +157,7 @@
             <h3 class="title is-5 result-item-title is-pulled-right">{{ aid }}</h3>
           </div>
           <div class="column is-one-third result-item-value">
-            <h3 class="title is-5 is-pulled-right">{{ value }} kCHF</h3>
+            <h3 class="title is-5 is-pulled-right">{{ numberFormatter.format(value) }}</h3>
           </div>
         </div>
         <div class="columns" v-if="state_aid.approxed">
@@ -177,6 +185,9 @@ export default {
     return { company_details: {'avg_payroll': 0}, state_aid: undefined };
   },
   computed: {
+    numberFormatter() {
+      return new Intl.NumberFormat(this.$i18n.locale + '-CH', { style: 'currency', currency: 'CHF', notation: "compact", compactDisplay: "short", useGrouping: true, precision: "largeNumber", minimumSignificantDigits: 3, minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    },
     avgPayrollMonthlyDisabled() {
       return this.company_details['employee_count'] == 0 && this.independent_worker;
     },
@@ -207,6 +218,15 @@ export default {
         this.company_details['independent_worker'] = newValue;
       }
     },
+    computedLocality() {
+      var zipCode = this.company_details['zip_code'];
+      var localityInfo = this.$props.algo.location(zipCode, this.$i18n.locale);
+
+      if (localityInfo) {
+        return localityInfo.city_name + ", " + localityInfo.canton_abbrev;
+      }
+      return "Ce NPA est introuvable.";
+    },
     values () {
       if (this.submittedValues) {
         return this.submittedValues;
@@ -230,12 +250,6 @@ export default {
   methods: {
     compute_aids (data) {
       this.submittedValues = data;
-      const revenue = data.avg_rev_monthly;
-      const isIndependent = data.independent_worker;
-      const unemployement_rate = data.unemployement_rate;
-      const payroll = data.avg_payroll;
-      const employees = data.employee_count;
-      console.log("OK " + revenue + ", " + isIndependent + ", " + unemployement_rate + ", " + payroll + ", " + employees);
       
       var input = {};
       input['corp_form'] = data['corp_form'];
@@ -247,8 +261,8 @@ export default {
       input['avg_revenue'] = data['avg_rev_monthly'];
       input['unemployement_rate'] = this.unemployementRate / 100;
       input['unemployement_rate_independent'] = this.unemployementRateIndependent / 100;
+      
       var state_aid = this.$props.algo.covidaid(input);
-      console.log(state_aid);
       
       const approxed = state_aid.rht_approx;
       delete state_aid.rht_approx;
@@ -257,12 +271,13 @@ export default {
       sum += state_aid.rht;
       sum += state_aid.apg;
       sum += state_aid.credit;
+      sum *= 1000;
       
       var aid_list = {};
       for (var key in state_aid) {
         var value = state_aid[key];
         if (value != 0) {
-          aid_list[key] = value;
+          aid_list[key] = value*1000;
         }
       }
       
@@ -271,7 +286,6 @@ export default {
         dict: aid_list,
         approxed: approxed
       };
-      
     }
   }
 }
@@ -285,9 +299,12 @@ export default {
 .nextby > div:nth-child(2) { 
   flex: 1;
 }
-.independent_worker {
-  margin-top:23px;
-  margin-left:30px;
+.offset_inlinecolumn {
+  margin-top:24px;
+  margin-left:20px;
+}
+.largeoffset {
+  margin-top:34px;
 }
 .section {
   padding-top: 1.5rem;
