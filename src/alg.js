@@ -5,6 +5,7 @@ import CantonManager from '@stefanzweifel/js-swiss-cantons';
 
 var canton_ressources = require('../data/covid19_canton_infos.json');
 var city_ressources = require('../data/covid19_city_infos.json');
+var more_ressources = require('../data/more_infos.json');
 
 function RHT(m, t){
     /*
@@ -53,9 +54,35 @@ function location(zipcode, language){
     var canton_links = {};
     var city_info = {};
     var city_links = {};
+    var rht_infos = {text: "", form: ""};
+    var apg_infos = {text: "", form: ""};
+    var credit_infos = {text: "", form: ""};
+    var all_infos = {text: ""};
     
     var search = new ZipcodeSearch();
     var location = search.findbyZipcode(zipcode);
+
+    rht_info = more_ressources.find(more_ressources => {
+        return more_ressources.type === 'RHT'
+    })
+    rht_infos.text = rht_info.text.language !== undefined ? rht_info.text.language : false
+
+    apg_info = more_ressources.find(more_ressources => {
+        return more_ressources.type === 'APG'
+    })
+    apg_infos.form = apg_info.form.language !== undefined ? apg_info.form.language : false
+    apg_infos.text = apg_info.text.language !== undefined ? apg_info.text.language : false
+
+    credit_info = more_ressources.find(more_ressources => {
+        return more_ressources.type === 'Credit'
+    })
+    credit_infos.form = credit_info.form.language !== undefined ? credit_info.form.language : false
+    credit_infos.text = credit_info.text.language !== undefined ? credit_info.text.language : false
+
+    all_info = more_ressources.find(more_ressources => {
+        return more_ressources.type === 'all'
+    })
+    all_infos.text = all_info.text.language !== undefined ? all_info.text.language : false
     
     if(location){
         var manager = new CantonManager();
@@ -75,11 +102,17 @@ function location(zipcode, language){
         })
         city_links = city_info !== undefined ? city_info.link_infos : false
         
-        return {city_name: city_name, canton_abbrev: canton_abbrev, canton_name: canton_name, canton_links: canton_links, city_links: city_links};
+        rht_info = more_ressources.find(more_ressources => {
+            return more_ressources.type === 'RHT'
+        })
+        rht_infos.form = rht_info.form.canton_abbrev !== undefined ? rht_info.form.canton_abbrev : false
+        
+        return {city_name: city_name, canton_abbrev: canton_abbrev, canton_name: canton_name, canton_links: canton_links, city_links: city_links, rht_infos: rht_infos, apg_infos: apg_infos, credit_infos: credit_infos, all_infos: all_infos};
     }
 
-    return false;
+    return {rht_infos: rht_infos, apg_infos: apg_infos, credit_infos: credit_infos, all_infos: all_infos};
 }
+
 
 function covidaid(input){
     /*
