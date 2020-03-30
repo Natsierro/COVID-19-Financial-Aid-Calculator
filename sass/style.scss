@@ -106,7 +106,11 @@ $subtitle-size: $size-5;
 }
 .result-item-desc {
 	clear: both;
+	text-align: justify;
 	display: none;
+}
+.result-all-desc {
+	text-align: justify;
 }
 .result-item-value {
 	text-align: right;
@@ -133,5 +137,10 @@ $subtitle-size: $size-5;
 .result-columns {
 	@include mobile {
 		border-bottom: 1px solid black;
+	}
+}
+.results-massnahmen-column {
+	@include from($tablet) {
+		padding-right: 0;
 	}
 }

@@ -157,9 +157,11 @@
           v-for="(value, aid) in state_aid.dict"
           :key="aid">
           <div class="column">
-            <h3 class="title is-5 result-item-title">{{ $t(aid) }}</h3>
-            <button v-on:click="readMore(aid)">{{ $t('read_more') }}</button>
-            <p class="result-item-desc" :id="aid + '-desc'">{{ value.desc }}</p>
+            <div class="aid-wrapper">
+              <h3 class="title is-5 result-item-title">{{ $t(aid) }}</h3>
+              <button class="read-more" v-on:click="readMore(aid)">{{ $t('read_more') }}</button>
+            </div>
+            <p class="result-item-desc" :id="aid + '-desc'" v-html="value.desc"></p>
           </div>
           <div class="column is-one-third result-item-value-column">
             <h3 class="title is-5 result-item-value">{{ numberFormatter.format(value.value) }}</h3>
@@ -172,6 +174,39 @@
             <h3 class="title is-5 result-item-title approx-warning">{{ $t('approx_warning') }}</h3>
           </div>
         </div>
+      </div>
+      <div class="column is-2-desktop is-0">
+      </div>
+    </div>
+    <div class="columns" v-if="state_aid != undefined">
+      <div class="column is-offset-2-widescreen is-offset-1-tablet results-massnahmen-column">
+        <h3 class="title is-3 results-massnahmen-heading">{{ $t('allgemeine_massnahmen') }}</h3>
+        <p class="result-all-desc" v-html="state_aid.all_desc"></p>
+      </div>
+      <div class="column is-2-desktop is-0">
+      </div>
+    </div>
+    <div class="columns" v-if="state_aid != undefined">
+      <div class="column is-offset-2-widescreen is-offset-1-tablet results-massnahmen-column">
+        <div class="results-massnahmen-column-inverter">
+          <h3 class="title is-3 results-massnahmen-heading">{{ $t('links') }}</h3>
+        </div>
+        <table class="links-table">
+          <tr 
+            class="" 
+            v-for="(value, aid) in state_aid.dict"
+            :key="aid">
+            <td class="links-table-aid">{{ $t(aid + "_short") }}</td>
+            <td><a :href="value.form">{{ value.form }}</a></td>
+          </tr>
+          <tr 
+            class="" 
+            v-for="(value, key) in state_aid.other_links"
+            :key="key">
+            <td class="links-table-aid">{{ $t(key) }} : {{ value.name }}</td>
+            <td><a :href="value.form">{{ value.link }}</a></td>
+          </tr>
+        </table>
       </div>
       <div class="column is-2-desktop is-0">
       </div>
@@ -301,18 +336,25 @@ export default {
         var value = state_aid[key];
         if (value != 0) {
           aid_list[key] =  { value: value*1000 };
-          aid_list[key]['desc'] = localityInfo[key + "_infos"].text;
-          console.log(localityInfo[key + "_infos"].text);
+          aid_list[key]['desc'] = localityInfo[key + "_infos"].text.replace(/\n/g, "<br />");
+          console.log(localityInfo);
           aid_list[key]['form'] = localityInfo[key + "_infos"].form;
           this.visibility[key] = false;
         }
       }
       
+      var other_links = {};
+      other_links['city'] = {name: localityInfo.city_name, link: localityInfo.city_links};
+      other_links['canton'] = {name: localityInfo.canton_name, link: localityInfo.canton_links};
+      
       this.state_aid = {
         sum: sum,
         dict: aid_list,
-        approxed: approxed
+        approxed: approxed,
+        all_desc: localityInfo['all_infos'].text.replace(/\n/g, "<br />"),
+        other_links: other_links
       };
+      console.log(this.state_aid);
     },
     readMore(id) {
       var x = document.getElementById(id + "-desc");
@@ -343,5 +385,67 @@ export default {
 }
 .approx-warning {
   font-style: italic;
+}
+.aid-wrapper > h3 {
+  margin-bottom: 5px;
+  text-align: right;
+}
+.aid-wrapper, .results-massnahmen-column-inverter {
+  margin-bottom: 1em;
+  text-align: right;
+}
+.results-massnahmen-column-inverter > h3 {
+  padding: 10px 15px 10px 60px;
+  text-align: right;
+}
+button.read-more {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  text-decoration: underline;
+  float: right;
+}
+button.read-more:after {
+  content:" >"
+}
+.results-massnahmen-heading {
+  background-color: black;
+  color: white;
+  display: inline-block;
+  padding: 10px 60px 10px 15px;
+}
+.links-table {
+  border-collapse: collapse;
+  border-spacing: 10px;
+  width: 100%;
+}
+.links-table td:last-child {
+  text-align: right;
+}
+.links-table tr > td {
+  padding-top: 1em;
+  padding-bottom: 0.1em;
+}
+.links-table tr:first-of-type > td {
+  padding-top: 0;
+}
+.links-table td {
+  border-bottom: 1px solid #000;
+}
+.links-table tr > td:first-of-type {
+  white-space: nowrap;
+}
+.links-table tr > td:last-of-type {
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow: hidden;
+  max-width: 250px;
+}
+.links-table-aid {
+  font-weight: bold;
 }
 </style>
