@@ -13,6 +13,7 @@
     "scom": "Limited Partnership",
     "indiv": "Sole proprietorship",
     "independent_worker": "Independant",
+    "zip_code_short": "Zipcode",
     "zip_code": "Zipcode",
     "zip_code_help": "Enter your zipcode. We will automatically calculate the township and city.",
     "zip_code_unknown": "This zipcode is nowhere to be found.",
@@ -24,12 +25,21 @@
     "unemployement_rate_independent": "Rate of partial unemployment of the self-employed",
     "lookup_aids": "Search for the aid available",
     
-    "read_more": "informations",
-    "total_sum": "TOTAL:",
+    "this_value": "This value",
+    "read_more": "more infos",
+    "total_sum": "TOTAL",
+    "rht_short": "RWH",
     "rht": "RWH (reduced working hours)",
+    "apg_short": "IC",
     "apg": "IC (income compensation)",
+    "credit_short": "Loan",
     "credit": "Bridging loans",
-    "approx_warning": "this amount is approximate!"
+    "approx_warning": "this amount is approximate!",
+    
+    "city": "City",
+    "canton": "Canton",
+    "allgemeine_massnahmen": "General measures",
+    "links": "Links"
   },
   "fr": {
     "selected": "Français sélectionné",
@@ -45,6 +55,7 @@
     "scom": "Société par commandite",
     "indiv": "Entreprise individuelle",
     "independent_worker": "Indépendant",
+    "zip_code_short": "NPA",
     "zip_code": "NPA (code postal)",
     "zip_code_help": "Entrez votre code postal. Nous calculerons automatiquement canton et ville.",
     "zip_code_unknown": "Ce NPA est introuvable.",
@@ -56,12 +67,21 @@
     "unemployement_rate_independent": "Taux de chômage partiel de l'indépendant",
     "lookup_aids": "Rechercher mes aides",
     
-    "read_more": "informations",
-    "total_sum": "TOTAL:",
+    "this_value": "Cette valeur",
+    "read_more": "+ d'infos",
+    "total_sum": "TOTAL",
+    "rht_short": "RHT",
     "rht": "RHT (réduction des horaires de travail)",
+    "apg_short": "APG",
     "apg": "APG (allocations perte de gains)",
+    "credit_short": "Crédit",
     "credit": "Crédit transitoire",
-    "approx_warning": "ce montant est approximatif !"
+    "approx_warning": "ce montant est approximatif !",
+    
+    "city": "Ville",
+    "canton": "Canton",
+    "allgemeine_massnahmen": "Mesures générales",
+    "links": "Liens"
   },
   "de": {
     "selected": "Deutsch ausgewählt",
@@ -77,6 +97,7 @@
     "scom": "Kommanditgesellschaft (KG)",
     "indiv": "Einmanngesellschaft",
     "independent_worker": "Selbstständig",
+    "zip_code_short": "PLZ",
     "zip_code": "PLZ (Postleitzahlen)",
     "zip_code_help": "Geben Sie Ihre Postleitzahl ein. Wir werden automatisch die Gemeinde und die Stadt berechnen.",
     "zip_code_unknown": "Diese PLZ ist nirgendwo zu finden.",
@@ -88,12 +109,21 @@
     "unemployement_rate_independent": "Kurzarbeitssatz des Selbständigen",
     "lookup_aids": "Suche nach meinen Hilfen",
     
-    "read_more": "Informationen",
-    "total_sum": "Gesamtsumme:",
+    "this_value": "Dieser Wert",
+    "read_more": "Weitere Informationen",
+    "total_sum": "Gesamtsumme",
+    "rht_short": "KAE",
     "rht": "KAE (Kurzarbeitsentschädigung)",
+    "apg_short": "EO",
     "apg": "EO (Erwerbsersatzordnung)",
+    "credit_short": "Kredite",
     "credit": "Kredite",
-    "approx_warning": "dieser Betrag ist nur ungefähr!"
+    "approx_warning": "dieser Betrag ist nur ungefähr!",
+    
+    "city": "Stadt/Gemeinde",
+    "canton": "Kanton",
+    "allgemeine_massnahmen": "Allgemeine Massnahmen",
+    "links": "Links"
   },
   "it": {
     "selected": "Italiano selezionato",
@@ -109,6 +139,7 @@
     "scom": "Società in accomandita",
     "indiv": "Ditta individuale",
     "independent_worker": "Indipendente",
+    "zip_code_short": "Codice postale",
     "zip_code": "Codice postale",
     "zip_code_help": "Inserisci il tuo codice postale. Calcoleremo automaticamente il comune e la città.",
     "zip_code_unknown": "Questa codice postale non si trova da nessuna parte.",
@@ -120,11 +151,20 @@
     "unemployement_rate_independent": "Tasso di disoccupazione parziale dei lavoratori autonomi",
     "lookup_aids": "Cerca i miei aiutanti",
     
-    "read_more": "informazioni",
+    "this_value": "Questo valore",
+    "read_more": "leggi tutto",
     "total_sum": "TOTALE:",
+    "rht_short": "ILR",
     "rht": "ILR (Indennità per lavoro ridotto)",
+    "apg_short": "IPG",
     "apg": "IPG (Indennità di perdita di guadagno)",
+    "credit_short": "Crediti",
     "credit": "Crediti transitori",
-    "approx_warning": "questo importo è approssimativo!"
+    "approx_warning": "questo importo è approssimativo!",
+    
+    "city": "Città",
+    "canton": "Cantone",
+    "allgemeine_massnahmen": "Misure generali",
+    "links": "Collegamenti"
   }
 }

@@ -25,7 +25,7 @@ export default {
     return { 
       locale: 'fr',
       languages: ['fr', 'de', 'en', 'it'],
-      unavailables: ['de', 'it']
+      unavailables: []
     }
   },
   watch: {

@@ -16,6 +16,7 @@
               :label="$t('corp_form')"
               name="corp_form"
               validation="required"
+              :validation-name="$t('corp_form')"
             />
           </div>
           <div class="column is-one-third-desktop is-half-tablet offset_inlinecolumn-column">
@@ -41,6 +42,7 @@
               pattern="[0-9]*"
               :validation="['required', ['matches', /^[1-9]{1}[0-9]{3}$/]]"
               class="npafield"
+              :validation-name="$t('zip_code_short')"
             />
           </div>
           <div class="column is-one-third-desktop is-half-tablet offset_inlinecolumn-column">
@@ -57,6 +59,7 @@
               value="0"
               min="0"
               error-behavior="live"
+              :validation-name="$t('this_value')"
             />
             <FormulateInput
               type="text"
@@ -66,6 +69,7 @@
               value="0"
               min="0"
               error-behavior="live"
+              :validation-name="$t('this_value')"
             />
           </div>
         </div>
@@ -80,6 +84,7 @@
               min="0"
               error-behavior="live"
               :disabled="avgPayrollMonthlyDisabled"
+              :validation-name="$t('this_value')"
             />
           </div>
           <div class="column is-one-third-desktop is-half-tablet">
@@ -92,6 +97,7 @@
               value="0"
               min="0"
               error-behavior="live"
+              :validation-name="$t('this_value')"
             />
           </div>
         </div>
@@ -107,6 +113,7 @@
               max="100"
               error-behavior="live"
               :disabled="avgPayrollMonthlyDisabled"
+              :validation-name="$t('this_value')"
             />
           </div>
           <div class="column is-one-third-desktop is-half-tablet">
@@ -120,6 +127,7 @@
               min="0"
               max="100"
               error-behavior="live"
+              :validation-name="$t('this_value')"
             />
           </div>
         </div>
@@ -222,7 +230,7 @@ export default {
     algo: Object()
   },
   data () {
-    return { company_details: {'avg_payroll': 0}, state_aid: undefined, visibility: {} };
+    return { company_details: {'avg_payroll': 0}, state_aid: undefined, visibility: {}, lastInput: {} };
   },
   computed: {
     numberFormatter() {
@@ -267,24 +275,13 @@ export default {
       }
       return this.$t('zip_code_unknown');
     },
-    values () {
-      if (this.submittedValues) {
-        return this.submittedValues;
-      }
-      const values = {};
-      for (const key in this.company_details) {
-        if (typeof this.company_details[key] === 'object') {
-          values[key] = this.company_details[key].toString();
-        } else {
-          values[key] = this.company_details[key];
-        }
-      }
-      return values;
+    virtualLocale() {
+      return this.$i18n.locale;
     }
   },
   watch: {
-    values() {
-      //this.company_details['independent_worker'] = this.company_details['corp_form'] == "indiv";
+    virtualLocale() {
+      this.compute_aids(this.lastInput);
     }
   },
   methods: {
@@ -318,6 +315,7 @@ export default {
       this.compute_aids(input);
     },
     compute_aids(input) {
+      this.lastInput = input;
       var state_aid = this.$props.algo.covidaid(input);
       
       const approxed = state_aid.rht_approx;
