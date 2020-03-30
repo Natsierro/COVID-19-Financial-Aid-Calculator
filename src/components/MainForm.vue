@@ -1,224 +1,269 @@
 <template>
   <section class="section">
     <div class="container">
-    <div class="columns">
-      <FormulateForm
-        v-model="company_details"
-        @submit="submitForm"
-        class="column is-four-fifths is-offset-2-widescreen is-offset-1-tablet"
-      >
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              :options="{sarl: $t('sarl'), sa: $t('sa'), snc: $t('snc'), scom: $t('scom'), indiv: $t('indiv')}"
-              type="select"
-              placeholder="Select an option"
-              :label="$t('corp_form')"
-              name="corp_form"
-              validation="required"
-              :validation-name="$t('corp_form')"
-            />
-          </div>
-          <div class="column is-one-third-desktop is-half-tablet offset_inlinecolumn-column">
-            <FormulateInput
-              v-model="independent_worker"
-              class="offset_inlinecolumn"
-              type="checkbox"
-              name="independent_worker"
-              :label="$t('independent_worker')"
-              :disabled="company_details['corp_form'] == 'indiv'"
-            />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              type="text"
-              name="zip_code"
-              :label="$t('zip_code')"
-              placeholder="1008"
-              :help="$t('zip_code_help')"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              :validation="['required', ['matches', /^[1-9]{1}[0-9]{3}$/]]"
-              class="npafield"
-              :validation-name="$t('zip_code_short')"
-            />
-          </div>
-          <div class="column is-one-third-desktop is-half-tablet offset_inlinecolumn-column">
-            <p class="offset_inlinecolumn largeoffset">{{ computedLocality }}</p>
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              type="text"
-              name="avg_rev_monthly"
-              :label="$t('avg_rev_monthly')"
-              validation="number"
-              value="0"
-              min="0"
-              error-behavior="live"
-              :validation-name="$t('this_value')"
-            />
-            <FormulateInput
-              type="text"
-              name="employee_count"
-              :label="$t('employee_count')"
-              validation="required|number"
-              value="0"
-              min="0"
-              error-behavior="live"
-              :validation-name="$t('this_value')"
-            />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              type="text"
-              name="avg_payroll"
-              :label="$t('avg_payroll_employees')"
-              validation="number"
-              value="0"
-              min="0"
-              error-behavior="live"
-              :disabled="avgPayrollMonthlyDisabled"
-              :validation-name="$t('this_value')"
-            />
-          </div>
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              v-if="independent_worker"
-              type="text"
-              name="avg_payroll_independent"
-              :label="$t('avg_payroll_independent')"
-              validation="number"
-              value="0"
-              min="0"
-              error-behavior="live"
-              :validation-name="$t('this_value')"
-            />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              type="text"
-              name="unemployement_rate"
-              :label="$t('unemployement_rate_employees')"
-              validation="number"
-              value="0"
-              min="0"
-              max="100"
-              error-behavior="live"
-              :disabled="avgPayrollMonthlyDisabled"
-              :validation-name="$t('this_value')"
-            />
-          </div>
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              v-if="independent_worker"
-              type="text"
-              name="unemployement_rate_independent"
-              :label="$t('unemployement_rate_independent')"
-              validation="number"
-              value="0"
-              min="0"
-              max="100"
-              error-behavior="live"
-              :validation-name="$t('this_value')"
-            />
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <!--future container-->
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column is-one-third-desktop is-half-tablet">
-            <FormulateInput
-              type="submit"
-              :label="$t('lookup_aids')"
-              class="submitter"
-            />
-          </div>
-          <div class="column is-one-third-desktop is-half-tablet">
-            <button v-on:click="magicSubmit">Magic!</button>
-          </div>
-        </div>
-      </FormulateForm>
-    </div>
-    <div class="columns" v-if="state_aid != undefined">
-      <div class="column is-offset-1-tablet is-offset-1-desktop is-offset-one-fifth-widescreen">
-        <div class="columns">
-          <div class="column">
-            <h3 class="title is-3 result-title">{{ $t('total_sum') }}</h3>
-          </div>
-          <div class="column is-one-third results-heading">
-            <h3 class="title is-3 result-value">{{ numberFormatter.format(state_aid.sum) }}</h3>
-          </div>
-        </div>
-        <div 
-          class="columns result-columns" 
-          v-for="(value, aid) in state_aid.dict"
-          :key="aid">
-          <div class="column">
-            <div class="aid-wrapper">
-              <h3 class="title is-5 result-item-title">{{ $t(aid) }}</h3>
-              <button class="read-more" v-on:click="readMore(aid)">{{ $t('read_more') }}</button>
+      <div class="columns">
+        <FormulateForm
+          v-model="company_details"
+          class="column is-four-fifths is-offset-2-widescreen is-offset-1-tablet"
+          @submit="submitForm"
+        >
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                :options="{sarl: $t('sarl'), sa: $t('sa'), snc: $t('snc'), scom: $t('scom'), indiv: $t('indiv')}"
+                type="select"
+                placeholder="Select an option"
+                :label="$t('corp_form')"
+                name="corp_form"
+                validation="required"
+                :validation-name="$t('corp_form')"
+              />
             </div>
-            <p class="result-item-desc" :id="aid + '-desc'" v-html="value.desc"></p>
+            <div class="column is-one-third-desktop is-half-tablet offset_inlinecolumn-column">
+              <FormulateInput
+                v-model="independent_worker"
+                class="offset_inlinecolumn"
+                type="checkbox"
+                name="independent_worker"
+                :label="$t('independent_worker')"
+                :disabled="company_details['corp_form'] == 'indiv'"
+              />
+            </div>
           </div>
-          <div class="column is-one-third result-item-value-column">
-            <h3 class="title is-5 result-item-value">{{ numberFormatter.format(value.value) }}</h3>
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                type="text"
+                name="zip_code"
+                :label="$t('zip_code')"
+                placeholder="1008"
+                :help="$t('zip_code_help')"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                :validation="['required', ['matches', /^[1-9]{1}[0-9]{3}$/]]"
+                class="npafield"
+                :validation-name="$t('zip_code_short')"
+              />
+            </div>
+            <div class="column is-one-third-desktop is-half-tablet offset_inlinecolumn-column">
+              <p class="offset_inlinecolumn largeoffset">
+                {{ computedLocality }}
+              </p>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                type="text"
+                name="avg_rev_monthly"
+                :label="$t('avg_rev_monthly')"
+                validation="number"
+                value="0"
+                min="0"
+                error-behavior="live"
+                :validation-name="$t('this_value')"
+              />
+              <FormulateInput
+                type="text"
+                name="employee_count"
+                :label="$t('employee_count')"
+                validation="required|number"
+                value="0"
+                min="0"
+                error-behavior="live"
+                :validation-name="$t('this_value')"
+              />
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                type="text"
+                name="avg_payroll"
+                :label="$t('avg_payroll_employees')"
+                validation="number"
+                value="0"
+                min="0"
+                error-behavior="live"
+                :disabled="avgPayrollMonthlyDisabled"
+                :validation-name="$t('this_value')"
+              />
+            </div>
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                v-if="independent_worker"
+                type="text"
+                name="avg_payroll_independent"
+                :label="$t('avg_payroll_independent')"
+                validation="number"
+                value="0"
+                min="0"
+                error-behavior="live"
+                :validation-name="$t('this_value')"
+              />
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                type="text"
+                name="unemployement_rate"
+                :label="$t('unemployement_rate_employees')"
+                validation="number"
+                value="0"
+                min="0"
+                max="100"
+                error-behavior="live"
+                :disabled="avgPayrollMonthlyDisabled"
+                :validation-name="$t('this_value')"
+              />
+            </div>
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                v-if="independent_worker"
+                type="text"
+                name="unemployement_rate_independent"
+                :label="$t('unemployement_rate_independent')"
+                validation="number"
+                value="0"
+                min="0"
+                max="100"
+                error-behavior="live"
+                :validation-name="$t('this_value')"
+              />
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+            <!--future container-->
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third-desktop is-half-tablet">
+              <FormulateInput
+                type="submit"
+                :label="$t('lookup_aids')"
+                class="submitter"
+              />
+            </div>
+            <div class="column is-one-third-desktop is-half-tablet">
+              <button @click="magicSubmit">
+                Magic!
+              </button>
+            </div>
+          </div>
+        </FormulateForm>
+      </div>
+      <div
+        v-if="state_aid != undefined"
+        class="columns"
+      >
+        <div class="column is-offset-1-tablet is-offset-1-desktop is-offset-one-fifth-widescreen">
+          <div class="columns">
+            <div class="column">
+              <h3 class="title is-3 result-title">
+                {{ $t('total_sum') }}
+              </h3>
+            </div>
+            <div class="column is-one-third results-heading">
+              <h3 class="title is-3 result-value">
+                {{ numberFormatter.format(state_aid.sum) }}
+              </h3>
+            </div>
+          </div>
+          <div 
+            v-for="(value, aid) in state_aid.dict" 
+            :key="aid"
+            class="columns result-columns"
+          >
+            <div class="column">
+              <div class="aid-wrapper">
+                <h3 class="title is-5 result-item-title">
+                  {{ $t(aid) }}
+                </h3>
+                <button
+                  class="read-more"
+                  @click="readMore(aid)"
+                >
+                  {{ $t('read_more') }}
+                </button>
+              </div>
+              <p
+                :id="aid + '-desc'"
+                class="result-item-desc"
+                v-html="value.desc"
+              />
+            </div>
+            <div class="column is-one-third result-item-value-column">
+              <h3 class="title is-5 result-item-value">
+                {{ numberFormatter.format(value.value) }}
+              </h3>
+            </div>
+          </div>
+          <div
+            v-if="state_aid.approxed"
+            class="columns"
+          >
+            <div class="column" />
+            <div class="column is-one-third result-item-value-column">
+              <h3 class="title is-5 result-item-title approx-warning">
+                {{ $t('approx_warning') }}
+              </h3>
+            </div>
           </div>
         </div>
-        <div class="columns" v-if="state_aid.approxed">
-          <div class="column">
-          </div>
-          <div class="column is-one-third result-item-value-column">
-            <h3 class="title is-5 result-item-title approx-warning">{{ $t('approx_warning') }}</h3>
-          </div>
+        <div class="column is-2-desktop is-0" />
+      </div>
+      <div
+        v-if="state_aid != undefined"
+        class="columns"
+      >
+        <div class="column is-offset-2-widescreen is-offset-1-tablet results-massnahmen-column">
+          <h3 class="title is-3 results-massnahmen-heading">
+            {{ $t('allgemeine_massnahmen') }}
+          </h3>
+          <p
+            class="result-all-desc"
+            v-html="state_aid.all_desc"
+          />
         </div>
+        <div class="column is-2-desktop is-0" />
       </div>
-      <div class="column is-2-desktop is-0">
-      </div>
-    </div>
-    <div class="columns" v-if="state_aid != undefined">
-      <div class="column is-offset-2-widescreen is-offset-1-tablet results-massnahmen-column">
-        <h3 class="title is-3 results-massnahmen-heading">{{ $t('allgemeine_massnahmen') }}</h3>
-        <p class="result-all-desc" v-html="state_aid.all_desc"></p>
-      </div>
-      <div class="column is-2-desktop is-0">
-      </div>
-    </div>
-    <div class="columns" v-if="state_aid != undefined">
-      <div class="column is-offset-2-widescreen is-offset-1-tablet results-massnahmen-column">
-        <div class="results-massnahmen-column-inverter">
-          <h3 class="title is-3 results-massnahmen-heading">{{ $t('links') }}</h3>
+      <div
+        v-if="state_aid != undefined"
+        class="columns"
+      >
+        <div class="column is-offset-2-widescreen is-offset-1-tablet results-massnahmen-column">
+          <div class="results-massnahmen-column-inverter">
+            <h3 class="title is-3 results-massnahmen-heading">
+              {{ $t('links') }}
+            </h3>
+          </div>
+          <table class="links-table">
+            <tr 
+              v-for="(value, aid) in state_aid.dict" 
+              :key="aid"
+              class=""
+            >
+              <td class="links-table-aid">
+                {{ $t(aid + "_short") }}
+              </td>
+              <td><a :href="value.form">{{ value.form }}</a></td>
+            </tr>
+            <tr 
+              v-for="(value, key) in state_aid.other_links" 
+              :key="key"
+              class=""
+            >
+              <td class="links-table-aid">
+                {{ $t(key) }} : {{ value.name }}
+              </td>
+              <td><a :href="value.form">{{ value.link }}</a></td>
+            </tr>
+          </table>
         </div>
-        <table class="links-table">
-          <tr 
-            class="" 
-            v-for="(value, aid) in state_aid.dict"
-            :key="aid">
-            <td class="links-table-aid">{{ $t(aid + "_short") }}</td>
-            <td><a :href="value.form">{{ value.form }}</a></td>
-          </tr>
-          <tr 
-            class="" 
-            v-for="(value, key) in state_aid.other_links"
-            :key="key">
-            <td class="links-table-aid">{{ $t(key) }} : {{ value.name }}</td>
-            <td><a :href="value.form">{{ value.link }}</a></td>
-          </tr>
-        </table>
+        <div class="column is-2-desktop is-0" />
       </div>
-      <div class="column is-2-desktop is-0">
-      </div>
-    </div>
     </div>
   </section>
 </template>

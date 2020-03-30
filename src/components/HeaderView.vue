@@ -4,8 +4,12 @@
       <h1 class="title site-title">
         <span class="sitename">covidaid.ch</span><span class="site-title-separator">:</span> {{ $t('tagline') }}
       </h1>
-      <p class="subtitle site-subtitle">{{ $t('site-description') }}</p>
-      <p class="subtitle site-subtitle"><em>{{ $t('site-calltoaction') }}</em></p>
+      <p class="subtitle site-subtitle">
+        {{ $t('site-description') }}
+      </p>
+      <p class="subtitle site-subtitle">
+        <em>{{ $t('site-calltoaction') }}</em>
+      </p>
     </div>
   </section>
 </template>
