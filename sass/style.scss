@@ -26,6 +26,34 @@ $subtitle-size: $size-5;
 	font-size: 14px;
 }
 
+.site-title {
+	@include until($desktop) {
+		font-size: 2rem;
+	}
+}
+
+.site-title-separator {
+	@include mobile {
+		display: none;
+	}
+}
+
+.site-title .sitename::after {
+	@include mobile {
+		content: "\A";
+		white-space: pre;
+	}
+}
+
+.site-subtitle {
+	@include until($desktop) {
+		font-size: 1.2rem;
+	}
+	@include mobile {
+		font-size: 1rem;
+	}
+}
+
 .sitename {
 	color: red;
 }

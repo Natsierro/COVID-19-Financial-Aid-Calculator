@@ -1,15 +1,11 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title">
-        <span class="sitename">covidaid.ch</span>: à quelles aides ai-je droit ?
+      <h1 class="title site-title">
+        <span class="sitename">covidaid.ch</span><span class="site-title-separator">:</span> {{ $t('tagline') }}
       </h1>
-      <p class="subtitle">
-        Le Conseil fédéral a pris des mesures pour atténuer les conséquences économiques de la pandémie de maladie à coronavirus de 2020. <br>Toutefois, les informations sont parfois complexes à intégrer et souvent dispersées.
-      </p>
-      <p class="subtitle">
-        <em>Le formulaire interactif suivant peut vous aider à comprendre à quelles aides vous avez droit.</em>
-      </p>
+      <p class="subtitle site-subtitle">{{ $t('site-description') }}</p>
+      <p class="subtitle site-subtitle"><em>{{ $t('site-calltoaction') }}</em></p>
     </div>
   </section>
 </template>

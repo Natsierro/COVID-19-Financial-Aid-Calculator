@@ -10,7 +10,7 @@
         <div class="columns">
           <div class="column is-one-third-desktop is-half-tablet">
             <FormulateInput
-              :options="{sarl: 'SàRL', sa: 'SA', snc: 'Société en nom collectif', scom: 'Société par commandite', indiv: 'Entreprise individuelle'}"
+              :options="{sarl: $t('sarl'), sa: $t('sa'), snc: $t('snc'), scom: $t('scom'), indiv: $t('indiv')}"
               type="select"
               placeholder="Select an option"
               :label="$t('corp_form')"
@@ -24,7 +24,7 @@
               class="offset_inlinecolumn"
               type="checkbox"
               name="independent_worker"
-              label="Indépendant"
+              :label="$t('independent_worker')"
               :disabled="company_details['corp_form'] == 'indiv'"
             />
           </div>
@@ -34,9 +34,9 @@
             <FormulateInput
               type="text"
               name="zip_code"
-              label="NPA (code postal)"
+              :label="$t('zip_code')"
               placeholder="1008"
-              help="Entrez votre code postal. Nous calculerons automatiquement canton et ville."
+              :help="$t('zip_code_help')"
               inputmode="numeric"
               pattern="[0-9]*"
               :validation="['required', ['matches', /^[1-9]{1}[0-9]{3}$/]]"
@@ -52,7 +52,7 @@
             <FormulateInput
               type="text"
               name="avg_rev_monthly"
-              label="Revenu mensuel moyen de votre entreprise (milliers de francs)"
+              :label="$t('avg_rev_monthly')"
               validation="number"
               value="0"
               min="0"
@@ -61,7 +61,7 @@
             <FormulateInput
               type="text"
               name="employee_count"
-              label="Nombre d'employés"
+              :label="$t('employee_count')"
               validation="required|number"
               value="0"
               min="0"
@@ -87,7 +87,7 @@
               v-if="independent_worker"
               type="text"
               name="avg_payroll_independent"
-              label="Salaire mensuel moyen de l'indépendant (milliers de francs)"
+              :label="$t('avg_payroll_independent')"
               validation="number"
               value="0"
               min="0"
@@ -100,7 +100,7 @@
             <FormulateInput
               type="text"
               name="unemployement_rate"
-              label="Taux de chômage partiel"
+              :label="$t('unemployement_rate_employees')"
               validation="number"
               value="0"
               min="0"
@@ -114,7 +114,7 @@
               v-if="independent_worker"
               type="text"
               name="unemployement_rate_independent"
-              label="Taux de chômage partiel de l'indépendant"
+              :label="$t('unemployement_rate_independent')"
               validation="number"
               value="0"
               min="0"
@@ -132,7 +132,7 @@
           <div class="column is-one-third-desktop is-half-tablet">
             <FormulateInput
               type="submit"
-              label="Rechercher mes aides"
+              :label="$t('lookup_aids')"
               class="submitter"
             />
           </div>
@@ -146,7 +146,7 @@
       <div class="column is-offset-1-tablet is-offset-1-desktop is-offset-one-fifth-widescreen">
         <div class="columns">
           <div class="column">
-            <h3 class="title is-3 result-title">TOTAL :</h3>
+            <h3 class="title is-3 result-title">{{ $t('total_sum') }}</h3>
           </div>
           <div class="column is-one-third results-heading">
             <h3 class="title is-3 result-value">{{ numberFormatter.format(state_aid.sum) }}</h3>
@@ -230,7 +230,7 @@ export default {
       if (locality) {
         return locality.city_name + ", " + locality.canton_abbrev;
       }
-      return "Ce NPA est introuvable.";
+      return this.$t('zip_code_unknown');
     },
     values () {
       if (this.submittedValues) {
@@ -295,34 +295,7 @@ export default {
       sum *= 1000;
       
       var localityInfo = this.$props.algo.location_infos(input.zip_code, this.$i18n.locale);
-      console.log(localityInfo);
-      localityInfo = {
-        all_infos: {
-          text: "Les entreprises frappées par la crise auront la possibilité de différer provisoirement et sans intérêt le versement des contributions aux assurances sociales (AVS, AI, APG, AC). les entreprises pourront repousser sans intérêt moratoire les délais de versement  pour les fournisseurs de la Confédération. Du 19 mars au 4 avril 2020 inclus, les débiteurs ne pourront pas être poursuivis, et ce sur tout le territoire suisse.",
-          type: "all"
-        },
-        apg_infos: {
-          type: "APG", 
-          text: "Les personnes exerçant une activité indépendante qui subissent une perte de gain due aux mesures prises par le gouvernement en vue de lutter contre le coronavirus seront indemnisées si elles ne bénéficient pas déjà d’une indemnité ou de prestations d’assurance. Une indemnisation est prévue dans les cas suivants :\n\n- fermeture des écoles ;\n- quarantaine ordonnée par un médecin ;\n\n- fermeture d’un établissement géré de manière indépendante et ouvert au public.\nLa réglementation s’applique également aux artistes indépendants qui ont subi une perte de gain parce que leur engagement a été annulé en raison des mesures de lutte contre le coro-navirus ou qu’ils ont dû annuler un événement organisé en propre.", 
-          form: "https://www.ahv-iv.ch/fr/Nouvelles-Infos/post/corona-erwerbsersatzentschaedigung-formular-merkblaetter-etc-sind-bereit"
-        },
-        canton_abbrev: "VD",
-        canton_links: "https://www.vd.ch/toutes-les-autorites/departements/departement-de-leconomie-de-linnovation-et-du-sport-deis/service-de-lemploi-sde/",
-        canton_name: "Vaud",
-        city_links: "https://www.lausanne.ch/en/vie-pratique/economie-et-commerces/COVID-19.html",
-        city_name: "Lausanne",
-        credit_infos: {
-          type: "Credit", 
-          text: "Aide immédiate sous la forme de crédits transitoires spécifique\nLes montants jusqu’à 0,5 million de francs seront versés immédiatement par les banques et seront couverts en totalité par la garantie de la Confédération. Cette garantie sera ramenée à 85 % pour les montants dépassant ce plafond, qui devront alors faire l’objet d’un bref examen par les banques. Les montants jusqu’à 0,5 million devraient couvrir les besoins de plus de 90 % des entreprises touchées par les conséquences de l’épidémie de coronavirus.", 
-          form: "https://www.easygov.swiss/easygov/#/fr/landing/covid"
-        },
-        rht_infos: {
-          type: "RHT", 
-          text: "Extension du chômage partiel et simplification des démarches\nLe chômage partiel pourra désormais également être octroyé aux salariés dont la durée d’engagement est limitée et aux personnes au service d’une organisation de travail temporaire. La perte de travail sera également comptabilisée pour les personnes qui sont en apprentissage. Le chômage partiel pourra être accordé aux personnes qui occupent une position assimilable à celle d’un employeur.  Les personnes qui travaillent dans l’entreprise de leur conjoint ou partenaire enregistré pourront également profiter du chômage partiel et faire valoir une indemnisation forfaitaire de 3320 francs pour un poste à plein temps.", 
-          form: "https://www.vd.ch/themes/economie/employeurs/indemnite-pour-reduction-de-lhoraire-de-travail-dans-le-cadre-de-lepidemie-de-coronavirus-2019-ncov/"
-        }
-      }
-      
+            
       var aid_list = {};
       for (var key in state_aid) {
         var value = state_aid[key];
