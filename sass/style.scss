@@ -39,3 +39,71 @@ $subtitle-size: $size-5;
 .section {
 	flex: 1;
 }
+
+.offset_inlinecolumn {
+	@include from($tablet) {
+		margin-top:24px;
+		margin-left:20px;
+	}
+}
+
+.largeoffset {
+	@include from($tablet) {
+		margin-top:34px;
+	}
+}
+
+.offset_inlinecolumn-column {
+	@include until($tablet) {
+		padding-top:0;
+	}
+}
+
+.results-heading {
+	background-color: black;
+	color: white;
+	text-align: right;
+}
+.result-title {
+	font-style: italic;
+	text-align: right;
+}
+.result-value {
+	color: white;
+	text-align: right;
+}
+.result-item-title {
+	display: block;
+	text-align: right;
+}
+.result-item-desc {
+	clear: both;
+	display: none;
+}
+.result-item-value {
+	text-align: right;
+}
+.result-item-value-column {
+	@include from($tablet) {
+		border-bottom: 1px solid black;
+	}
+}
+.title.result-item-title {
+	@include until($desktop) {
+		font-size: 1.2rem;
+	}
+}
+.title.result-value, .title.result-title {
+	font-size: 1.8rem;
+	@include until($desktop) {
+		font-size: 1.5rem;
+	}
+	@include mobile {
+		font-size: 1.3rem;
+	}
+}
+.result-columns {
+	@include mobile {
+		border-bottom: 1px solid black;
+	}
+}

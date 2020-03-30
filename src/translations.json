@@ -9,6 +9,10 @@
     "selected": "Français sélectionné",
     "corp_form": "Raison sociale",
     "avg_payroll_employees": "Masse salariale mensuelle moyenne (milliers de francs)",
-    "avg_payroll_independentsemployees": "Masse salariale mensuelle moyenne (milliers de francs)"
+    "avg_payroll_independentsemployees": "Masse salariale mensuelle moyenne (milliers de francs)",
+    "read_more": "informations",
+    "rht": "RHT (réduction des horaires de travail)",
+    "credit": "Crédit transitoire",
+    "approx_warning": "ce montant est approximatif !"
   }
 }
