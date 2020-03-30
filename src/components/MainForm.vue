@@ -146,7 +146,7 @@
             <h3 class="title is-3 result-title is-pulled-right">TOTAL :</h3>
           </div>
           <div class="column is-one-third results-heading">
-            <h3 class="title is-3 result-value is-pulled-right">{{ state_aid.sum }} kCHF</h3>
+            <h3 class="title is-3 result-value is-pulled-right">{{ numberFormatter.format(state_aid.sum) }}</h3>
           </div>
         </div>
         <div 
@@ -157,7 +157,7 @@
             <h3 class="title is-5 result-item-title is-pulled-right">{{ aid }}</h3>
           </div>
           <div class="column is-one-third result-item-value">
-            <h3 class="title is-5 is-pulled-right">{{ value }} kCHF</h3>
+            <h3 class="title is-5 is-pulled-right">{{ numberFormatter.format(value) }}</h3>
           </div>
         </div>
         <div class="columns" v-if="state_aid.approxed">
@@ -185,6 +185,9 @@ export default {
     return { company_details: {'avg_payroll': 0}, state_aid: undefined };
   },
   computed: {
+    numberFormatter() {
+      return new Intl.NumberFormat(this.$i18n.locale + '-CH', { style: 'currency', currency: 'CHF', notation: "compact", compactDisplay: "short", useGrouping: true, precision: "largeNumber", minimumSignificantDigits: 3, minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    },
     avgPayrollMonthlyDisabled() {
       return this.company_details['employee_count'] == 0 && this.independent_worker;
     },
@@ -268,12 +271,13 @@ export default {
       sum += state_aid.rht;
       sum += state_aid.apg;
       sum += state_aid.credit;
+      sum *= 1000;
       
       var aid_list = {};
       for (var key in state_aid) {
         var value = state_aid[key];
         if (value != 0) {
-          aid_list[key] = value;
+          aid_list[key] = value*1000;
         }
       }
       
@@ -282,7 +286,6 @@ export default {
         dict: aid_list,
         approxed: approxed
       };
-      
     }
   }
 }
