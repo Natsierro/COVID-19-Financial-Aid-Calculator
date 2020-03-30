@@ -380,7 +380,6 @@ export default {
         if (value != 0) {
           aid_list[key] =  { value: value*1000 };
           aid_list[key]['desc'] = localityInfo[key + "_infos"].text.replace(/\n/g, "<br />");
-          console.log(localityInfo);
           aid_list[key]['form'] = localityInfo[key + "_infos"].form;
           this.visibility[key] = false;
         }
@@ -397,7 +396,6 @@ export default {
         all_desc: localityInfo['all_infos'].text.replace(/\n/g, "<br />"),
         other_links: other_links
       };
-      console.log(this.state_aid);
     },
     readMore(id) {
       var x = document.getElementById(id + "-desc");
