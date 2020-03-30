@@ -6,5 +6,25 @@
     {
         "city": "Zürich",
         "link_infos": "https://www.stadt-zuerich.ch/gud/de/index/gesundheitsversorgung/public-health/coronavirus-sars-cov-2/wirtschaft.html"
+    },
+    {
+        "city": "Genève",
+        "link_infos": "https://www.geneve.ch/fr/actualites/nouveau-coronavirus-decisions-autorites-informations-concernant-ville-geneve"
+    },
+    {
+        "city": "Zug",
+        "link_infos": "https://www.stadtzug.ch/sicherheit/23683"
+    },
+    {
+        "city": "St-Gallen",
+        "link_infos": "https://www.stadt.sg.ch/home/wirtschaft-arbeit/Hinweise-und-Tips-fuers-Gewerbe.html"
+    },
+    {
+        "city": "Neuchâtel",
+        "link_infos": "https://www.neuchatelville.ch/fileadmin/sites/ne_ville/fichiers/presse/communiques_presse/imported/2020/Communique_mesures_crise_26032020.pdf"
+    },
+    {
+        "city": "Delémont",
+        "link_infos": "http://www.delemont.ch/fr/Coronavirus/Communiques-officiels.html"
     }
 ]
