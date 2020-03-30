@@ -1,7 +1,35 @@
 {
   "en": {
-    "selected": "seleeeect",
-    "corp_form": "Corporate form"
+    "selected": "English selected",
+    
+    "tagline": "what aid am I entitled to?",
+    "site-description": "The Federal Council has taken measures to mitigate the economic consequences of the coronavirus pandemic of 2020. \nHowever, the information is sometimes complex to integrate and often scattered.",
+    "site-calltoaction": "The following interactive form can help you understand what assistance you are entitled to.",
+    
+    "corp_form": "Corporate form",
+    "sarl": "LLC",
+    "sa": "Public limited company (SA/AG)",
+    "snc": "General partnership",
+    "scom": "Limited Partnership",
+    "indiv": "Sole proprietorship",
+    "independent_worker": "Independant",
+    "zip_code": "Zipcode",
+    "zip_code_help": "Enter your zipcode. We will automatically calculate the township and city.",
+    "zip_code_unknown": "This zipcode is nowhere to be found.",
+    "avg_rev_monthly": "Average monthly income of your company (thousands of francs)",
+    "employee_count": "Number of employees",
+    "avg_payroll_employees": "Average monthly payroll (thousands of francs)",
+    "avg_payroll_independent": "Average monthly salary of the self-employed person (thousands of francs)",
+    "unemployement_rate_employees": "Short-time working rate",
+    "unemployement_rate_independent": "Rate of partial unemployment of the self-employed",
+    "lookup_aids": "Search for the aid available",
+    
+    "read_more": "informations",
+    "total_sum": "TOTAL:",
+    "rht": "RWH (reduced working hours)",
+    "apg": "IC (income compensation)",
+    "credit": "Bridging loans",
+    "approx_warning": "this amount is approximate!"
   },
   "fr": {
     "selected": "Français sélectionné",
@@ -34,5 +62,69 @@
     "apg": "APG (allocations perte de gains)",
     "credit": "Crédit transitoire",
     "approx_warning": "ce montant est approximatif !"
+  },
+  "de": {
+    "selected": "Deutsch ausgewählt",
+    
+    "tagline": "Auf welche Unterstützung habe ich Anspruch?",
+    "site-description": "Der Bundesrat hat Massnahmen ergriffen, um die wirtschaftlichen Folgen der Coronavirus-Pandemie von 2020 zu mildern. \nDie Informationen sind jedoch manchmal komplex zu integrieren und oft verstreut.",
+    "site-calltoaction": "Das folgende interaktive Formular kann Ihnen helfen zu verstehen, auf welche Unterstützung Sie Anspruch haben.",
+    
+    "corp_form": "Gesellschaftsform",
+    "sarl": "GmbH",
+    "sa": "AG",
+    "snc": "Offene Handels-Gesellschaft (OHG)",
+    "scom": "Kommanditgesellschaft (KG)",
+    "indiv": "Einmanngesellschaft",
+    "independent_worker": "Selbstständig",
+    "zip_code": "PLZ (Postleitzahlen)",
+    "zip_code_help": "Geben Sie Ihre Postleitzahl ein. Wir werden automatisch die Gemeinde und die Stadt berechnen.",
+    "zip_code_unknown": "Diese PLZ ist nirgendwo zu finden.",
+    "avg_rev_monthly": "Durchschnittliches Monatseinkommen Ihres Unternehmens (Tausende von Franken)",
+    "employee_count": "Anzahl der Mitarbeiter",
+    "avg_payroll_employees": "Durchschnittliche monatliche Lohnsumme (Tausende von Franken)",
+    "avg_payroll_independent": "Durchschnittlicher Monatslohn des Selbständigen (Tausende von Francs)",
+    "unemployement_rate_employees": "Kurzarbeitssatz",
+    "unemployement_rate_independent": "Kurzarbeitssatz des Selbständigen",
+    "lookup_aids": "Suche nach meinen Hilfen",
+    
+    "read_more": "Informationen",
+    "total_sum": "Gesamtsumme:",
+    "rht": "KAE (Kurzarbeitsentschädigung)",
+    "apg": "EO (Erwerbsersatzordnung)",
+    "credit": "Kredite",
+    "approx_warning": "dieser Betrag ist nur ungefähr!"
+  },
+  "it": {
+    "selected": "Italiano selezionato",
+    
+    "tagline": "à quelles aides ai-je droit ?",
+    "site-description": "Il Consiglio federale ha adottato misure per attenuare le conseguenze economiche della pandemia di coronavirus del 2020. \n Ogni caso, le informazioni sono a volte complesse da integrare e spesso disperse.",
+    "site-calltoaction": "Il seguente modulo interattivo può aiutarvi a capire a quale assistenza avete diritto.",
+    
+    "corp_form": "Forma giuridica",
+    "sarl": "SAGL",
+    "sa": "SA",
+    "snc": "Società in nome collettivo",
+    "scom": "Società in accomandita",
+    "indiv": "Ditta individuale",
+    "independent_worker": "Indipendente",
+    "zip_code": "Codice postale",
+    "zip_code_help": "Inserisci il tuo codice postale. Calcoleremo automaticamente il comune e la città.",
+    "zip_code_unknown": "Questa codice postale non si trova da nessuna parte.",
+    "avg_rev_monthly": "Reddito medio mensile della vostra azienda (migliaia di franchi)",
+    "employee_count": "Numero di dipendenti",
+    "avg_payroll_employees": "Stipendi mensili medi (migliaia di franchi)",
+    "avg_payroll_independent": "Salario medio mensile del lavoratore autonomo (migliaia di franchi)",
+    "unemployement_rate_employees": "Tasso di lavoro a breve termine",
+    "unemployement_rate_independent": "Tasso di disoccupazione parziale dei lavoratori autonomi",
+    "lookup_aids": "Cerca i miei aiutanti",
+    
+    "read_more": "informazioni",
+    "total_sum": "TOTALE:",
+    "rht": "ILR (Indennità per lavoro ridotto)",
+    "apg": "IPG (Indennità di perdita di guadagno)",
+    "credit": "Crediti transitori",
+    "approx_warning": "questo importo è approssimativo!"
   }
 }
