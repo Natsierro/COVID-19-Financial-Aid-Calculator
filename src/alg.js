@@ -12,7 +12,7 @@ function RHT(m, t){
         will calculate the Réducation Horaire Travail which means the partial unemployment in CHF given to the firm
         m is the monthly salarial mass of the firm and t is the pourcentage of missing hours
     */
-    if(t=>0.1){
+    if(t>=0.1){
         return m*t*0.8;
     }
     else{return 0;}

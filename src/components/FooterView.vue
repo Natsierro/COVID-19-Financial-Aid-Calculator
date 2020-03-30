@@ -11,10 +11,10 @@
           <div class="content">
             <a
               class="button is-small is-info is-rounded"
-              href="LINK"
+              href="https://github.com/Natsierro/COVID-19-Financial-Aid-Calculator#License"
               target="_blank"
               rel="noopener"
-              title="Лицензия"
+              title="license"
             >LICENSE</a>
             <a
               class="button is-small is-info is-rounded"
@@ -24,7 +24,7 @@
               class="button is-small is-dark is-rounded"
               target="_blank"
               rel="noopener"
-              href="https://github.com/Alroniks"
+              href="https://github.com/Natsierro/COVID-19-Financial-Aid-Calculator"
             >GitHub</a>
           </div>
         </div>
