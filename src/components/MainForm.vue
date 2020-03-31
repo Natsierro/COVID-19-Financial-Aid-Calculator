@@ -153,7 +153,7 @@
         v-if="state_aid != undefined"
         class="columns"
       >
-        <div class="column is-offset-1-tablet is-offset-1-desktop is-offset-one-fifth-widescreen">
+        <div class="column is-offset-2-widescreen is-offset-1-tablet">
           <div class="columns">
             <div class="column">
               <h3 class="title is-3 result-title">
@@ -274,7 +274,7 @@ export default {
   },
   computed: {
     numberFormatter() {
-      return new Intl.NumberFormat(this.$i18n.locale + '-CH', { style: 'currency', currency: 'CHF', notation: "compact", compactDisplay: "short", useGrouping: true, precision: "largeNumber", minimumSignificantDigits: 3, minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      return new Intl.NumberFormat(this.$i18n.locale + '-CH', { style: 'currency', currency: 'CHF', minimumFractionDigits: 0, maximumFractionDigits: 0 });
     },
     avgPayrollMonthlyDisabled() {
       return this.company_details['employee_count'] == 0 && this.independent_worker;
@@ -353,6 +353,7 @@ export default {
       sum += state_aid.apg;
       sum += state_aid.credit;
       sum *= 1000;
+      sum = sum.toFixed(0);
       
       var localityInfo = this.$props.algo.location_infos(input.zip_code, this.$i18n.locale);
             
@@ -360,7 +361,7 @@ export default {
       for (var key in state_aid) {
         var value = state_aid[key];
         if (value != 0) {
-          aid_list[key] =  { value: value*1000 };
+          aid_list[key] =  { value: (value*1000).toFixed(0) };
           aid_list[key]['desc'] = localityInfo[key + "_infos"].text.replace(/\n/g, "<br />");
           aid_list[key]['form'] = localityInfo[key + "_infos"].form;
           this.visibility[key] = false;
