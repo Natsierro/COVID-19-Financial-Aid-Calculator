@@ -17,7 +17,6 @@ import MainForm from './components/MainForm.vue'
 import FooterView from './components/FooterView.vue'
 
 const algo = require('./alg.js');
-console.log(algo);
 
 export default {
   name: 'App',
